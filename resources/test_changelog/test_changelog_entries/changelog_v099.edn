@@ -1,0 +1,12 @@
+{:date {:year 1999
+        :month "October"
+        :day 0}
+ :responsible {:name "Aragorn FitzArathorn"
+               :email "aragorn@example.com"}
+ :version 99
+ :comment "Initial public release."
+ :project-status :active
+ :stable false
+ :urgency :low
+ :breaking? nil
+ :changes []}

@@ -1,0 +1,13 @@
+{:project-formatted-name "Gondor"
+ :copyright-holder "Gandalf Greyhame"
+
+ :changelog-UUID #uuid "2dc2eec7-9bfa-429d-94a2-9e9b50ce561d"
+
+ :changelog-html-directory "resources/test_changelog/test_outputs/"
+ :changelog-html-filename "test_changelog.html"
+
+ :changelog-markdown-directory "resources/test_changelog/test_outputs/"
+ :changelog-markdown-filename "test_changelog.md"
+
+ :changelog-entries-directory "resources/test_changelog/test_changelog_entries/"
+ :changelog-data-file "changelog.edn"}

@@ -1,0 +1,31 @@
+{:date {:year 2001
+        :month "December"
+        :day 31}
+ :responsible {:name "Aragorn FitzArathorn"
+               :email "aragorn@example.com"}
+ :version 101
+ :comment "Added features."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? false
+ :changes [{:description "Added new widget."
+            :change-type :added-functions
+            :added-functions ['widget-1
+                              'widget-2]
+            :breaking? false
+            :date {:year 2001
+                   :month "December"
+                   :day 1}
+            :responsible {:name "Boromir"
+                          :email "minas.tirith@example.com"}}
+           {:description "Added new spinner."
+            :change-type :added-functions
+            :added-functions ['spinner-A
+                              'spinner-B]
+            :breaking? false
+            :date {:year 2001
+                   :month "December"
+                   :day 5}
+            :responsible {:name "Faramir"
+                          :email "osgiliath@example.com"}}]}

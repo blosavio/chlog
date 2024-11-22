@@ -1,0 +1,32 @@
+{:date {:year 2000
+        :month "November"
+        :day 1}
+ :responsible {:name "Galadriel d'Lórien"
+               :email "gal@example.com"}
+ :version 100
+ :comment "Bug fixes and function renames."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? true
+ :changes [{:description "Fixed arithmetic bug."
+            :change-type :bug-fix
+            :altered-functions ['lembas]
+            :breaking? false
+            :date {:year 2000
+                   :month "November"
+                   :day 1}
+            :responsible {:name "Merry"
+                          :email "m.brandybuck@example.com"}}
+           {:description "Renamed functions for clarity."
+            :change-type :renamed-functions
+            :renamed-functions [{:old-function-name 'shortcut
+                                 :new-function-name 'wrongway}
+                                {:old-function-name 'horses
+                                 :new-function-name 'ponies}]
+            :breaking? true
+            :date {:year 2000
+                   :month "November"
+                   :day 1}
+            :responsible {:name "Pippin"
+                          :email "took@example.com"}}]}

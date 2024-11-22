@@ -1,0 +1,177 @@
+(ns chlog.core
+  "Changelog aggregation, specification, validation, and webpage generation.
+
+  Options map key-vals:
+
+  * `:project-formatted-filename`
+  * `:copyright-holder`
+  * `:changelog-UUID`
+  * `:changelog-html-directory`
+  * `:changelog-html-filename`
+  * `:changelog-markdown-directory`
+  * `:changelog-markdown-filename`
+  * `:changelog-entries-directory`
+  * `:changelog-policies-section` (optional)"
+  (:require
+   [hiccup2.core :as h2]
+   [hiccup.page :as page]
+   [hiccup.element :as element]
+   [hiccup.form :as form]
+   [hiccup.util :as util]
+   [readmoi.core :refer :all]))
+
+
+(def ^{:no-doc true} default-policy-docstring
+  "Location of Chlog library policies. Will display unless superseded by
+ `:changlog-policies-section` provied by options map.")
+
+
+(def ^{:doc default-policy-docstring} default-changelog-policy-section (load-file "src/chlog/changelog_policy.edn"))
+
+
+(defn renamed-fns
+  "Given a sequence `o2n` of 'old-fn-name'-to-'new-fn-name' maps, generate a
+  hiccup/html unordered list of old to new."
+  {:UUIDv4 #uuid "6f04837d-8314-4ef2-b729-14a1cb31b990"
+   :no-doc true}
+  [o2n]
+  (let [sorted-oldnames (sort-by :old-function-name o2n)]
+    (reduce #(conj %1 [:li [:code (name (:old-function-name %2))] " → " [:code (name (:new-function-name %2))]]) [:ul] sorted-oldnames)))
+
+
+(defn something-ed-fns
+  "Given a sequence `changes` of changelog change maps, aggregate functions that
+  have `change-type`, one of
+  * `:added-functions`,
+  * `:renamed-functions`,
+  * `:moved-functions`,
+  * `:removed-functions`, or
+  * `:function-arguments`."
+  {:UUIDv4 #uuid "d9a2782a-c903-4338-93f2-78871d352cdd"
+   :no-doc true}
+  [changes change-type]
+  (let [aggregation (reduce #(clojure.set/union %1 (set (change-type %2))) #{} changes)]
+    (if (= change-type :renamed-functions)
+      [(renamed-fns aggregation)]
+      (->> aggregation
+           vec
+           sort
+           (map #(vector :code (str %)))
+           (interpose ", ")))))
+
+
+(defn change-details
+  "Given a sequence of `changes`, return a hiccup/html unordered list that lists
+  the changes."
+  {:UUIDv4 #uuid "5ed2bc16-9d57-4a88-acb4-ee5dae218110"
+   :no-doc true}
+  [changes]
+  (let [grouped-changes (group-by #(:breaking? %) changes)
+        breaking-changes (grouped-changes true)
+        non-breaking-changes (concat (grouped-changes false)
+                                     (grouped-changes nil))
+        issue-reference #(if (:reference %) [:a {:href (:url (:reference %))} (:source (:reference %))] nil)
+        issue-reference-seperator #(if (:reference %) ": " nil)]
+    [:div
+     [:h4 "Breaking changes"]
+     (into [:ul] (map (fn [v] [:li [:div (issue-reference v) (issue-reference-seperator v) (str (:description v))]])) breaking-changes)
+     [:h4 "Non-breaking changes"]
+     (into [:ul] (map (fn [v] [:li [:div (issue-reference v) (issue-reference-seperator v) (str (:description v))]])) non-breaking-changes)]))
+
+
+(defn generate-version-section
+  "Given a map `m` that contains data on a single changelog version, generate
+  hiccup/html for a section that displays that info."
+  {:UUIDv4 #uuid "6d232a01-4cc1-4b91-8b63-7a5da9a96cb3"
+   :no-doc true}
+  [m]
+  (let [changed-function-div (fn [label change-type] (let [something-ized-fn (something-ed-fns (m :changes) change-type)]
+                                                       (if (empty? something-ized-fn)
+                                                         nil
+                                                         (into [:div [:em (str label " functions: ")]] something-ized-fn))))]
+    [:section
+     [:h3 (str "version " (:version m))]
+     [:p
+      (str (:year (:date m)) " "
+           (:month (:date m)) " "
+           (:day (:date m))) [:br]
+      (str (:name (:responsible m)) " (" (:email (:responsible m)) ")") [:br]
+      [:em "Description: "] (str (:comment m)) [:br]
+      [:em "Project status: "] [:a {:href "https://github.com/metosin/open-source/blob/main/project-status.md"} (name (:project-status m))] [:br]
+      [:em "Urgency: "] (name (:urgency m)) [:br]
+      [:em "Breaking: "] (if (:breaking? m) "yes" "no")]
+     [:p
+      (changed-function-div "added" :added-functions)
+      (let [possible-renames (something-ed-fns (m :changes) :renamed-functions)]
+        (if (= [[:ul]] possible-renames)
+          nil
+          (into [:div [:em "renamed functions: "]] possible-renames)))
+      (changed-function-div "moved" :moved-functions)
+      (changed-function-div "removed" :removed-functions)
+      (changed-function-div "altered" :altered-functions)]
+     (change-details (m :changes))
+     [:hr]]))
+
+
+(defn changelog-md-footer
+  "Given an options map `opt`, retruns a page footer with a copyright notice and a
+  compiled on date, plus the changelog UUID."
+  {:UUIDv4 #uuid "4c8f92ab-e956-44f5-9a60-73bc4c2baee2"
+   :no-doc true}
+  [opt]
+  [:p#page-footer
+   (copyright (opt :copyright-holder))
+   [:br]
+   "Compiled by " [:a {:href "https://github.com/blosavio/chlog"} "Chlog"] " on " (short-date) "."
+   [:span#uuid [:br] (opt :changelog-UUID)]])
+
+
+(defn generate-chlog-html
+  "foobar"
+  {:UUIDv4 #uuid "0184510a-85ae-49eb-9524-bae20cd26962"
+   :no-doc true}
+  [opt changelog-data]
+  (spit (str (opt :changelog-html-directory) (opt :changelog-html-filename))
+        (page-template
+         (str (opt :project-formatted-name) " library changelog")
+         (opt :changelog-UUID)
+         (conj [:body
+                [:h1 (str (opt :project-formatted-name) " library changelog")]
+                [:a {:href "#info"} "changelog meta"]]
+               (into (map #(generate-version-section %) (reverse changelog-data)))
+               (conj (or (opt :changelog-policies-section) default-changelog-policy-section)))
+         (opt :copyright-holder)
+         [:a {:href "https://github.com/blosavio/chlog"} "Chlog"])))
+
+
+(defn generate-chlog-markdown
+  "foobar"
+  {:UUIDv4 #uuid "2db604c4-7755-491d-a59d-2d2f49b1a60c"
+   :no-doc true}
+  [opt changelog-data]
+  (spit (str (opt :changelog-markdown-directory) (opt :changelog-markdown-filename))
+        (h2/html
+         (vec (-> [:body
+                   [:h1 (str (opt :project-formatted-name) " library changelog")]
+                   [:a {:href "#info"} "changelog meta"]]
+                  (into (map #(generate-version-section %) (reverse changelog-data)))
+                  (conj (or (opt :changelog-policies-section) default-changelog-policy-section))
+                  (conj (changelog-md-footer opt)))))))
+
+
+(defn generate-all-changelogs
+  "Given Chlog options `opt`, write-to-file html and markdown changeloges.
+
+  See project documentation for details on the structure of the options map.
+
+  Changelog data will be read from `resources/changelog_entries/changelog.edn`
+  unless superseded by both `:changelog-entries-directory` and
+  `:changelog-data-file` values in the options map."
+  {:UUIDv4 #uuid "cb525541-2d98-4003-9ab7-777661933cf6"}
+  [opt]
+  (let [changelog-data (load-file (if (and (opt :changelog-entries-directory)
+                                           (opt :changelog-data-file))
+                                    (str (opt :changelog-entries-directory) (opt :changelog-data-file))
+                                    "resources/changelog_entries/changelog.edn"))]
+    (do (generate-chlog-html opt changelog-data)
+        (generate-chlog-markdown opt changelog-data))))
