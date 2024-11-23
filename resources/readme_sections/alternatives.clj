@@ -1,0 +1,15 @@
+[:section#alternatives
+ [:h2 "Alternatives"]
+
+ [:ul
+  [:li [:p [:strong "Classic markdown/html files"] " Discussed above."]]
+  
+  [:li [:p [:strong "Changelog generated from version control commit log"] " At first glance, a changelog generated from a version control log seems natural. It is certainly easy, and there are many concepts in common. However, the purpose of a changelog is different enough to merit its own focus."]
+   
+   [:p "Version control logs communicate information about the development history to developers of that software. Changelogs communicate the details of the released versions to people who consume the software. Related, but subtly different."]
+
+   [:p "A commit message notes fine-grained changes to the software, somewhat like a diary of software development. It would feel a bit oppressive to have to consider how every commit message would appear in a public changelog. The evolution of software is noisy. Commit messages may involve false starts, mistakes, and dead ends. They are meant to be read by peopole " [:em "developing"] " the software itsef. Plus, writing commit messages that also serve as a changelog entry would require some kind of standards or specifications, or heroic discipline by the authors. Finally, commit messages typically do not concern themselves about whether the change is breaking for the people using the software."]
+
+   [:p "Changelogs, on the other hand, should clearly and concisely communicate, to people " [:em "using"] " the software, the differences between one version and another. It could be fine- or coarse-grained, but the freedom to decide should be independent of the version control log. Authoring a changelog requires care, judgment, and empathy for people ultimately using the software, and is a task somewhat different from wrangling version control commit messages."]]]
+
+ [:p "If a protest were made about the labor involved in maintaining such a changelog, Chlog provides one viable option: Keep the changelog as " [:code ".edn"] " data, and Chlog will take care of the html/markdown."]]
