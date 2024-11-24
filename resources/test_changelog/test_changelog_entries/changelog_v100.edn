@@ -29,4 +29,18 @@
                    :month "November"
                    :day 1}
             :responsible {:name "Pippin"
+                          :email "took@example.com"}}
+           {:description "Moved functions to another namespace."
+            :change-type :moved-functions
+            :breaking? true
+            :moved-functions [{:fn-name 'first-breakfast
+                               :old-location 'gondor.morning
+                               :new-location 'gondor.early-morning}
+                              {:fn-name 'second-breakfast
+                               :old-location 'gondor.morning
+                               :new-location 'gondor.late-morning}]
+            :date {:year 2000
+                   :month "November"
+                   :day 1}
+            :responsible {:name "Pippin"
                           :email "took@example.com"}}]}

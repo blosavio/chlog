@@ -13,7 +13,7 @@
 
  [:p "Changelog information is stored as a series of nested collections in " [:code ".edn"] " files. Every " [:a {:href "#version"} [:em "version"]] " is represented by the following map."]
 
- [:pre [:code "{:version ___\n :date {:year ___\n        :month ___\n        :day ___}\n :responsible {:name ___\n               :email___}\n :project-status ___\n :breaking? ___\n :urgency ___\n :comment ___\n :changes [...]}"]]
+ [:pre [:code "{:version ___\n :date {:year ___\n        :month ___\n        :day ___ }\n :responsible {:name ___\n               :email ___ }\n :project-status ___\n :breaking? ___\n :urgency ___\n :comment ___\n :changes [...]}"]]
 
  [:p "This map (and all the following) is formally and canonically " [:a {:href "https://github.com/blosavio/chlog/blob/main/src/chlog/changelog_specifications.clj"} "specified"] " with a " [:a {:href "https://github.com/blosavio/speculoos"} "Speculoos"] " style specification."]
 
@@ -31,7 +31,7 @@
 
  [:p "A " [:a {:href "#changelog"} "changelog"] " is a tail-appended vector of one or more such " [:em "version"] " hash-maps. Furthermore, a version hash-map may have zero or more " [:a {:href "#change"} [:em "change"]] " hash-maps associated to the " [:code ":changes"] " key. A " [:em "change"] " hash-map looks like this."]
  
- [:pre [:code "{:description ___\n :reference {:source ___\n             :url ___}\n :change-type ___\n :breaking? ___\n :altered-functions []\n :date {:year ___\n        :month ___\n        :day ___}\n :responsible {:name ___\n               :email ___}}"]]
+ [:pre [:code "{:description ___\n :reference {:source ___\n             :url ___}\n :change-type ___\n :breaking? ___\n :altered-functions []\n :date {:year ___\n        :month ___\n        :day ___ }\n :responsible {:name ___\n               :email ___ }}"]]
 
  [:p "Besides a sequence of " [:code ":altered-functions"] ", a change may contain sequences of " [:code ":added-functions"] ", " [:code ":removed-functions"] ", " [:code ":renamed-functions"] ", and " [:code ":moved-functions"] "."]
 

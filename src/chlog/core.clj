@@ -39,6 +39,15 @@
     (reduce #(conj %1 [:li [:code (name (:old-function-name %2))] " → " [:code (name (:new-function-name %2))]]) [:ul] sorted-oldnames)))
 
 
+(defn moved-fns
+  "Given a sequence `o2n` of `old-location`-to-`new-location` maps, generate a
+  hiccup/html unordered list of old to new."
+  {:UUIDv4 #uuid "5b5dd073-fd55-4bf7-91ae-b80657cb77c0"}
+  [o2n]
+  (let [sorted-fns (sort-by :fn-name o2n)]
+    (reduce #(conj %1 [:li [:code (name (:fn-name %2))] " from " [:code (name (:old-location %2))] " to " [:code (name (:new-location %2))]]) [:ul] sorted-fns)))
+
+
 (defn something-ed-fns
   "Given a sequence `changes` of changelog change maps, aggregate functions that
   have `change-type`, one of
@@ -51,8 +60,9 @@
    :no-doc true}
   [changes change-type]
   (let [aggregation (reduce #(clojure.set/union %1 (set (change-type %2))) #{} changes)]
-    (if (= change-type :renamed-functions)
-      [(renamed-fns aggregation)]
+    (case change-type
+      :renamed-functions [(renamed-fns aggregation)]
+      :moved-functions [(moved-fns aggregation)]
       (->> aggregation
            vec
            sort

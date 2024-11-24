@@ -1,46 +1,44 @@
-(ns changelog-specifications-test
+(ns chlog.changelog-specifications-tests
   "Tests for the changelog predicates."
-  {:no-doc true}
   (:require
-   [changelog-specifications :refer :all]
+   [chlog.changelog-specifications :refer :all]
    [clojure.test :refer [are
                          deftest
                          is
                          run-tests
-                         testing]]
-   [speculoos.core :refer [valid-collections?
-                           valid-scalars?]]))
+                         testing]]))
 
 
-(deftest year-predicate-tests
+(deftest year?-tests
   (are [x] (true? x)
-    (year-predicate 2000)
-    (year-predicate 3000))
+    (year? 2000)
+    (year? 3000))
   (are [x] (false? x)
-    (year-predicate -1)
-    (year-predicate "abc")))
+    (year? -1)
+    (year? "abc")))
 
 
-(deftest day-predicate-tests
+(deftest day?-tests
   (are [x] (true? x)
-    (day-predicate 1)
-    (day-predicate 31))
+    (day? 1)
+    (day? 31))
   (are [x] (false? x)
-    (day-predicate 0)
-    (day-predicate 32)))
+    (day? 0)
+    (day? 32)))
 
 
-(deftest ticket-predicate-tests
+(deftest ticket?-tests
   (are [x] (true? x)
-    (ticket-predicate "")
-    (ticket-predicate "abc")
-    (ticket-predicate #uuid "dd60a7cf-146b-4ee0-bc32-311442b5a278"))
+    (ticket? "")
+    (ticket? "abc")
+    (ticket? #uuid "dd60a7cf-146b-4ee0-bc32-311442b5a278"))
   (are [x] (false? x)
-    (ticket-predicate 'foo)
-    (ticket-predicate :foo)))
+    (ticket? 'foo)
+    (ticket? :foo)))
 
 
 (defn url? [s] (and (string? s) (boolean (re-find (get reference-spec :url) s))))
+
 
 (deftest ref-url-tests
   (are [x] (true? x)
@@ -52,17 +50,18 @@
     (url? "https://")))
 
 
-(deftest breaking-predicate-tests
+(deftest breaking?-tests
   (are [x] (true? x)
-    (breaking-predicate true)
-    (breaking-predicate false)
-    (breaking-predicate nil))
+    (breaking? true)
+    (breaking? false)
+    (breaking? nil))
   (are [x] (false? x)
-    (breaking-predicate :true)
-    (breaking-predicate "true")))
+    (breaking? :true)
+    (breaking? "true")))
 
 
 (defn email? [s] (and (string? s) (boolean (re-find (get person-spec :email) s))))
+
 
 (deftest person-email-tests
   (are [x] (true? x)
@@ -75,18 +74,19 @@
     (email? "foo@")))
 
 
-(deftest version-predicate-tests
+(deftest version?-tests
   (are [x] (true? x)
-    (version-predicate 0)
-    (version-predicate 1)
-    (version-predicate 99))
+    (version? 0)
+    (version? 1)
+    (version? 99))
   (are [x] (false? x)
-    (version-predicate "0")
-    (version-predicate :0)
-    (version-predicate 1.0)))
+    (version? "0")
+    (version? :0)
+    (version? 1.0)))
 
 
 (def req-keys-1? (contains-required-keys? #{:a :b :c}))
+
 
 (deftest contains-required-keys?-tests
   (are [x] (true? x)

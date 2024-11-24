@@ -1,43 +1,45 @@
-(ns changelog-specifications
+(ns chlog.changelog-specifications
   "Speculoos specifications for changelog entries."
   {:UUIDv4 #uuid "c2d0b1f4-3af9-481d-b34a-6e96e6989a00"
-   :no-doc true})
+   :no-doc true}
+  (:require
+   [clojure.set :refer [difference]]))
 
 
 ;; scalar specifications
 
 
-(defn year-predicate [n] (and (int? n) (<= 2000 n)))
+(defn year? [n] (and (int? n) (<= 2000 n)))
 
 
-(def month-predicate #{"January"
-                       "February"
-                       "March"
-                       "April"
-                       "May"
-                       "June"
-                       "July"
-                       "August"
-                       "September"
-                       "October"
-                       "November"
-                       "December"})
+(def month? #{"January"
+              "February"
+              "March"
+              "April"
+              "May"
+              "June"
+              "July"
+              "August"
+              "September"
+              "October"
+              "November"
+              "December"})
 
 
-(defn day-predicate [n] (and (int? n) (<= 1 n 31)))
+(defn day? [n] (and (int? n) (<= 1 n 31)))
 
 
-(def date-spec {:year year-predicate
-                :month month-predicate
-                :day day-predicate})
+(def date-spec {:year year?
+                :month month?
+                :day day?})
 
 
-(defn ticket-predicate [t] (or (string? t) (uuid? t)))
+(defn ticket? [t] (or (string? t) (uuid? t)))
 
 
 (def reference-spec {:source string?
                      :url #"^https:\/{2}[\w\/\.]+"
-                     :ticket ticket-predicate})
+                     :ticket ticket?})
 
 
 (def change-kinds #{:initial-release
@@ -100,19 +102,19 @@
 ;;   * deprecated:   Not recommended for any use.
 
 
-(def status-predicate #{:experimental
-                        :active
-                        :stable
-                        :inactive
-                        :deprecated})
+(def status? #{:experimental
+               :active
+               :stable
+               :inactive
+               :deprecated})
 
 
-(defn breaking-predicate [b] (or (nil? b) (boolean? b)))
+(defn breaking? [b] (or (nil? b) (boolean? b)))
 
 
 ;; Policy: ':breaking?' is `false` if that version can be installed and will
-;; work in all known circumstances with *no* other changes (including changes in
-;; deps); otherwise, the version is `breaking? true`.
+;; work in all reasonable circumstances with *no* other changes (including
+;; changes in deps); otherwise, the version is `:breaking? true`.
 
 ;; The following lists are not chiseled in stone. Use judgment, and err on the
 ;; side of caution. Think of other people!
@@ -156,7 +158,7 @@
                          :description string?
                          :reference reference-spec
                          :change-type change-kinds
-                         :breaking? breaking-predicate
+                         :breaking? breaking?
                          :added-functions (repeat symbol?)
                          :renamed-functions (repeat renamed-function-spec)
                          :moved-functions (repeat symbol?)
@@ -164,14 +166,14 @@
                          :removed-functions (repeat symbol?)})
 
 
-(defn version-predicate [i] (and (int? i) (<= 0 i)))
+(defn version? [i] (and (int? i) (<= 0 i)))
 
 
 (def version-scalar-spec {:date date-spec
                           :responsible person-spec
-                          :version version-predicate
+                          :version version?
                           :comment string?
-                          :project-status status-predicate
+                          :project-status status?
                           :stable boolean?
                           :urgency #{:low :medium :high}
                           :breaking? boolean?})
@@ -181,6 +183,7 @@
 
 
 ;; collection specifications
+
 
 ;;; required keys
 
@@ -206,7 +209,7 @@
   contains all keys enumerated in set `req-keys`."
   {:UUIDv4 #uuid "71880b60-6ce7-4477-84f0-f8716b047692"}
   [req-keys]
-  #(empty? (clojure.set/difference req-keys (set (keys %)))))
+  #(empty? (difference req-keys (set (keys %)))))
 
 
 (def version-coll-spec {:req-ver-keys? (contains-required-keys? version-required-keys)
@@ -218,7 +221,13 @@
 
 ;;; proper version incrementing
 
-"Someone might reasonably point out that that manually declaring the version number _inside_ a sequential collection is redundant and error-prone. But, I may change my mind in the future and switch to dotted version numbers, version letters, or some other format. Plus, the changelog is intended to be machine- _and_ human-readable (with priority on the latter), and the subsections are split between different files. So it's more ergonomic to put in an explicit version number."
+;; Someone might reasonably point out that that manually declaring the version
+;; number _inside_ a sequential collection is redundant and error-prone. But,
+;; I may change my mind in the future and switch to dotted version numbers,
+;; version letters, or some other format. Plus, the changelog is intended to be
+;; machine- _and_ human-readable (with priority on the latter), and the
+;; subsections are split between different files. So it's more ergonomic to put
+;; in an explicit version number.
 
 
 (defn properly-incrementing-versions?

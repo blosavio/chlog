@@ -23,6 +23,31 @@
      [:li [:code "foo"] " → " [:code "bar"]]]))
 
 
+(deftest moved-fns-tests
+  (are [x y] (= x y)
+    (moved-fns [])
+    [:ul]
+
+    (moved-fns [{:fn-name 'foo
+                 :old-location 'old-ns
+                 :new-location 'new-ns}])
+    [:ul [:li [:code "foo"] " from " [:code "old-ns"] " to " [:code "new-ns"]]]
+
+    (moved-fns [{:fn-name 'foo
+                 :old-location 'ns-1
+                 :new-location 'ns-2}
+                {:fn-name 'bar
+                 :old-location 'ns-3
+                 :new-location 'ns-4}
+                {:fn-name 'baz
+                 :old-location 'ns-5
+                 :new-location 'ns-6}])
+    [:ul
+     [:li [:code "bar"] " from " [:code "ns-3"] " to " [:code "ns-4"]]
+     [:li [:code "baz"] " from " [:code "ns-5"] " to " [:code "ns-6"]]
+     [:li [:code "foo"] " from " [:code "ns-1"] " to " [:code "ns-2"]]]))
+
+
 (deftest something-ed-fns-tests
   (are [x] (empty? x)
     (something-ed-fns [] :altered-functions)
@@ -73,7 +98,9 @@
                                :changes [{:added-functions ['+]
                                           :renamed-functions [{:old-function-name 'foo
                                                                :new-function-name 'bar}]
-                                          :moved-functions ['*]
+                                          :moved-functions [{:fn-name '*
+                                                             :old-location 'ns-1
+                                                             :new-location 'ns-2}]
                                           :removed-functions ['-]
                                           :altered-functions ['/]
                                           :breaking? true
@@ -88,17 +115,13 @@
       [:em "Breaking: "] "yes"]
      [:p
       [:div [:em "added functions: "] [:code "+"]]
-      [:div [:em "renamed functions: "]
-       [:ul
-        [:li [:code "foo"] " → " [:code "bar"]]]]
-      [:div [:em "moved functions: "] [:code "*"]]
+      [:div [:em "renamed functions: "] [:ul [:li [:code "foo"] " → " [:code "bar"]]]]
+      [:div [:em "moved functions: "] [:ul [:li [:code "*"] " from " [:code "ns-1"] " to " [:code "ns-2"]]]]
       [:div [:em "removed functions: "] [:code "-"]]
       [:div [:em "altered functions: "] [:code "/"]]]
-     [:div [:h4 "Breaking changes"]
-      [:ul
-       [:li [:div nil nil "This is an example of a breaking change."]]]
-      [:h4 "Non-breaking changes"] [:ul]]
-     [:hr]]))
+     [:div
+      [:h4 "Breaking changes"] [:ul [:li [:div nil nil "This is an example of a breaking change."]]]
+      [:h4 "Non-breaking changes"] [:ul]] [:hr]]))
 
 
 (deftest changelog-md-footer-tests
