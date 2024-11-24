@@ -60,10 +60,11 @@
                     :dependency-version
 
                     :added-functions
-                    :renamed-functions
-                    :moved-functions
+                    :altered-functions                    
+                    :deprecated-functions
+                    :moved-functions                    
                     :removed-functions
-                    :altered-functions
+                    :renamed-functions
 
                     :function-arguments
                     :relaxed-input-requirements

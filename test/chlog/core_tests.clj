@@ -96,18 +96,22 @@
                                :urgency :low
                                :breaking? true
                                :changes [{:added-functions ['+]
-                                          :renamed-functions [{:old-function-name 'foo
-                                                               :new-function-name 'bar}]
+                                          :altered-functions ['/]
+                                          :deprecated-functions ['++]
                                           :moved-functions [{:fn-name '*
                                                              :old-location 'ns-1
                                                              :new-location 'ns-2}]
+                                          :renamed-functions [{:old-function-name 'foo
+                                                               :new-function-name 'bar}]
                                           :removed-functions ['-]
-                                          :altered-functions ['/]
                                           :breaking? true
-                                          :description "This is an example of a breaking change."}]})
+                                          :description "This is an example of a breaking change."
+                                          :reference {:source "Issue #1"
+                                                      :url "https://example.com"}}]})
     [:section
      [:h3 "version 99"]
-     [:p "1999 Month 0" [:br]
+     [:p
+      "1999 Month 0" [:br]
       "Foo Bar (FooBar@example.com)" [:br]
       [:em "Description: "] "Example comment" [:br]
       [:em "Project status: "] [:a {:href "https://github.com/metosin/open-source/blob/main/project-status.md"} "active"] [:br]
@@ -115,12 +119,13 @@
       [:em "Breaking: "] "yes"]
      [:p
       [:div [:em "added functions: "] [:code "+"]]
-      [:div [:em "renamed functions: "] [:ul [:li [:code "foo"] " → " [:code "bar"]]]]
+      [:div [:em "altered functions: "] [:code "/"]]
+      [:div [:em "deprecated functions: "] [:code "++"]]
       [:div [:em "moved functions: "] [:ul [:li [:code "*"] " from " [:code "ns-1"] " to " [:code "ns-2"]]]]
-      [:div [:em "removed functions: "] [:code "-"]]
-      [:div [:em "altered functions: "] [:code "/"]]]
+      [:div [:em "renamed functions: "] [:ul [:li [:code "foo"] " → " [:code "bar"]]]]
+      [:div [:em "removed functions: "] [:code "-"]]]
      [:div
-      [:h4 "Breaking changes"] [:ul [:li [:div nil nil "This is an example of a breaking change."]]]
+      [:h4 "Breaking changes"] [:ul [:li [:div [:a {:href "https://example.com"} "Issue #1"] ": " "This is an example of a breaking change."]]]
       [:h4 "Non-breaking changes"] [:ul]] [:hr]]))
 
 

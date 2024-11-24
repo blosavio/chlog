@@ -51,11 +51,16 @@
 (defn something-ed-fns
   "Given a sequence `changes` of changelog change maps, aggregate functions that
   have `change-type`, one of
-  * `:added-functions`,
-  * `:renamed-functions`,
-  * `:moved-functions`,
-  * `:removed-functions`, or
-  * `:function-arguments`."
+
+  * `:added-functions`
+  * `:altered-functions`
+  * `:deprecated-functions`
+  * `:function-arguments`
+  * `:moved-functions`
+  * `:removed-functions`
+  * `:renamed-functions`
+
+  See `chlog.changelog-specifications/change-kinds` for canonical listing."
   {:UUIDv4 #uuid "d9a2782a-c903-4338-93f2-78871d352cdd"
    :no-doc true}
   [changes change-type]
@@ -112,13 +117,17 @@
       [:em "Breaking: "] (if (:breaking? m) "yes" "no")]
      [:p
       (changed-function-div "added" :added-functions)
+      (changed-function-div "altered" :altered-functions)
+      (changed-function-div "deprecated" :deprecated-functions)
+      (let [possible-moves (something-ed-fns (m :changes) :moved-functions)]
+        (if (= [[:ul]]  possible-moves)
+          nil
+          (into [:div [:em "moved functions: "]] possible-moves)))
       (let [possible-renames (something-ed-fns (m :changes) :renamed-functions)]
         (if (= [[:ul]] possible-renames)
           nil
           (into [:div [:em "renamed functions: "]] possible-renames)))
-      (changed-function-div "moved" :moved-functions)
-      (changed-function-div "removed" :removed-functions)
-      (changed-function-div "altered" :altered-functions)]
+      (changed-function-div "removed" :removed-functions)]
      (change-details (m :changes))
      [:hr]]))
 

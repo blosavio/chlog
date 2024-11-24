@@ -13,6 +13,8 @@
             :change-type :bug-fix
             :altered-functions ['lembas]
             :breaking? false
+            :reference {:source "GitHub Issue #12"
+                        :url "https://example.com"}
             :date {:year 2000
                    :month "November"
                    :day 1}
@@ -43,4 +45,18 @@
                    :month "November"
                    :day 1}
             :responsible {:name "Pippin"
-                          :email "took@example.com"}}]}
+                          :email "took@example.com"}}
+           {:description "Deprecated `double-string-reverse` function; un-needed."
+            :change-type :deprecated-functions
+            :deprecated-functions ['double-string-reverse]
+            :breaking? false
+            :date {:year 2000
+                   :month "November"
+                   :day 1}}
+           {:description "Removed `emyn-muil` function; obsolete."
+            :change-type :removed-functions
+            :removed-functions ['emyn-muil]
+            :breaking? true
+            :date {:year 2000
+                   :month "November"
+                   :day 1}}]}
