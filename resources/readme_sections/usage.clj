@@ -33,7 +33,7 @@
  
  [:pre [:code "{:description ___\n :reference {:source ___\n             :url ___}\n :change-type ___\n :breaking? ___\n :altered-functions []\n :date {:year ___\n        :month ___\n        :day ___ }\n :responsible {:name ___\n               :email ___ }}"]]
 
- [:p "Besides a sequence of " [:code ":altered-functions"] ", a change may contain sequences of " [:code ":added-functions"] ", " [:code ":removed-functions"] ", " [:code ":renamed-functions"] ", and " [:code ":moved-functions"] "."]
+ [:p "Besides a sequence of " [:code ":altered-functions"] ", a change may contain sequences of " [:code ":added-functions"] ", " [:code ":deprecated-functions"] ", " [:code ":moved-functions"] ", " [:code ":removed-functions"] ", and " [:code ":renamed-functions"] "."]
 
  [:p "The parts of a change hash-map are:"]
 

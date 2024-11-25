@@ -27,8 +27,9 @@
 
  [:ul
   [:li "all regressions (performance, memory, network)"]
-  [:li "added or changed dependency (see note below)"]
-  [:li "renamed/moved/removed functions"]
+  [:li "added or changed dependencies (see note below)"]
+  [:li "removed or renamed namespaces"]
+  [:li "moved, renamed, or removed functions"]
   [:li "stricter input requirements"]
   [:li "decreased return"]
   [:li "different default"]]
@@ -38,7 +39,8 @@
  [:ul
   [:li "all improvements (performance, memory, network)"]
   [:li "removed dependencies"]
-  [:li "added functions"]
+  [:li "added or deprecated namespaces"]
+  [:li "added or deprecated functions"]
   [:li "relaxed input requirements"]
   [:li "increased returns"]
   [:li "implementation"]

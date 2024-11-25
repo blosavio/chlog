@@ -59,6 +59,11 @@
                     :removed-dependency
                     :dependency-version
 
+                    :added-namespaces
+                    :deprecated-namespaces
+                    :removed-namespaces
+                    :renamed-namespaces
+
                     :added-functions
                     :altered-functions                    
                     :deprecated-functions

@@ -10,4 +10,6 @@
  :changelog-markdown-filename "test_changelog.md"
 
  :changelog-entries-directory "resources/test_changelog/test_changelog_entries/"
- :changelog-data-file "changelog.edn"}
+ :changelog-data-file "changelog.edn"
+
+ :changelog-policies-section [:a {:href "https://example.com"} "Alternative changelog policies"]}

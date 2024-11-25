@@ -22,11 +22,11 @@
 
 
 (def ^{:no-doc true} default-policy-docstring
-  "Location of Chlog library policies. Will display unless superseded by
- `:changlog-policies-section` provied by options map.")
+  "Chlog library policies. Will display unless superseded by
+ `:changelog-policies-section` provied by options map.")
 
 
-(def ^{:doc default-policy-docstring} default-changelog-policy-section (load-file "src/chlog/changelog_policy.edn"))
+(def ^{:doc default-policy-docstring} default-changelog-policy-section [:a {:href "https://github.com/blosavio/chlog"} "changelog info"])
 
 
 (defn renamed-fns
@@ -156,9 +156,8 @@
          (opt :changelog-UUID)
          (conj [:body
                 [:h1 (str (opt :project-formatted-name) " library changelog")]
-                [:a {:href "#info"} "changelog meta"]]
-               (into (map #(generate-version-section %) (reverse changelog-data)))
-               (conj (or (opt :changelog-policies-section) default-changelog-policy-section)))
+                (or (opt :changelog-policies-section) default-changelog-policy-section)]
+               (into (map #(generate-version-section %) (reverse changelog-data))))
          (opt :copyright-holder)
          [:a {:href "https://github.com/blosavio/chlog"} "Chlog"])))
 
@@ -172,9 +171,8 @@
         (h2/html
          (vec (-> [:body
                    [:h1 (str (opt :project-formatted-name) " library changelog")]
-                   [:a {:href "#info"} "changelog meta"]]
+                   (or (opt :changelog-policies-section) default-changelog-policy-section)]
                   (into (map #(generate-version-section %) (reverse changelog-data)))
-                  (conj (or (opt :changelog-policies-section) default-changelog-policy-section))
                   (conj (changelog-md-footer opt)))))))
 
 
