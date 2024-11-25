@@ -51,8 +51,17 @@
  
  [:p "One important kind of change that kinda defies categorization is bug-fixes. According to the notion that a non-breaking change must be a perfect drop-in replacement, a bug fix would classify as a breaking change. Tentative policy: Bug fixes are non-breaking changes, but it depends on the scenario."]
 
- [:h3 "Required information for each version"]
+ [:h3 "Formal specifications state required information"]
 
  [:p "Each version has required information that is explicitly delineated in the " [:a {:href "https://github.com/blosavio/chlog/blob/main/src/chlog/changelog_specifications.clj"} "specifications"] ". Correctness of a changelog, or any sub-component of the changelog, may be verified by validating the changelog against those specifications."]
+
+ [:h3 "Etc."]
+
+ [:ul
+  [:li [:p "A changelog is mutable. Corrections and additions are encouraged. The changelog itself is versioned-controlled data, and the html/markdown documents that are generated from the changelog data are also under version-control."]]
+
+  [:li [:p "Yanked or retracted releases can simply be noted by revising the changelog data."]]
+
+  [:li [:p "Much of the changelog data is objective, but some is merely the changelog author's opinions. That's okay. The changelog author is communicating that opinion to the person considering switching versions. The changelog author may consider a particular bug-fix " [:code ":high"] " urgency, but the person using the software may not."]]]
  
  ]

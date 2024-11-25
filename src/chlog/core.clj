@@ -21,14 +21,6 @@
    [readmoi.core :refer :all]))
 
 
-(def ^{:no-doc true} default-policy-docstring
-  "Chlog library policies. Will display unless superseded by
- `:changelog-policies-section` provied by options map.")
-
-
-(def ^{:doc default-policy-docstring} default-changelog-policy-section [:a {:href "https://github.com/blosavio/chlog"} "changelog info"])
-
-
 (defn renamed-fns
   "Given a sequence `o2n` of 'old-fn-name'-to-'new-fn-name' maps, generate a
   hiccup/html unordered list of old to new."
@@ -156,7 +148,7 @@
          (opt :changelog-UUID)
          (conj [:body
                 [:h1 (str (opt :project-formatted-name) " library changelog")]
-                (or (opt :changelog-policies-section) default-changelog-policy-section)]
+                (opt :changelog-policies-section)]
                (into (map #(generate-version-section %) (reverse changelog-data))))
          (opt :copyright-holder)
          [:a {:href "https://github.com/blosavio/chlog"} "Chlog"])))
@@ -171,7 +163,7 @@
         (h2/html
          (vec (-> [:body
                    [:h1 (str (opt :project-formatted-name) " library changelog")]
-                   (or (opt :changelog-policies-section) default-changelog-policy-section)]
+                   (opt :changelog-policies-section)]
                   (into (map #(generate-version-section %) (reverse changelog-data)))
                   (conj (changelog-md-footer opt)))))))
 
@@ -182,13 +174,13 @@
   See project documentation for details on the structure of the options map.
 
   Changelog data will be read from `resources/changelog_entries/changelog.edn`
-  unless superseded by both `:changelog-entries-directory` and
-  `:changelog-data-file` values in the options map."
+  unless superseded by `:changelog-entries-directory` or
+  `:changelog-data-file` values in the options map.
+
+  Defaults supplied by `src/chlog_defaults.edn`"
   {:UUIDv4 #uuid "cb525541-2d98-4003-9ab7-777661933cf6"}
   [opt]
-  (let [changelog-data (load-file (if (and (opt :changelog-entries-directory)
-                                           (opt :changelog-data-file))
-                                    (str (opt :changelog-entries-directory) (opt :changelog-data-file))
-                                    "resources/changelog_entries/changelog.edn"))]
-    (do (generate-chlog-html opt changelog-data)
-        (generate-chlog-markdown opt changelog-data))))
+  (let [options-n-defaults (merge (load-file "src/chlog/chlog_defaults.edn") opt)
+        changelog-data (load-file (str (options-n-defaults :changelog-entries-directory) (options-n-defaults :changelog-data-file)))]
+    (do (generate-chlog-html options-n-defaults changelog-data)
+        (generate-chlog-markdown options-n-defaults changelog-data))))
