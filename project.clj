@@ -1,5 +1,5 @@
 (defproject com.sagevisuals/chlog "0-SNAPSHOT0"
-  :description "A Clojure library for generating a project changelog from hiccup/html."
+  :description "A Clojure library for maintaining an edn changelog."
   :url "https://blosavio.github.io/chlog/home.html"
   :license {:name "MIT License"
             :url "https://opensource.org/license/mit"

@@ -18,7 +18,7 @@
  ;; special directives to zprint on how to handle these functions
  :fn-map-additions {}
 
- :project-description "A Clojure library for generating a project changelog from hiccup/html"
+ :project-description "A Clojure library for maintaining an edn changelog"
  :project-name-formatted "Chlog"
 
  :readme-UUID #uuid "e0d63371-4eb7-4431-a5f1-1cf0f5c46a72"
