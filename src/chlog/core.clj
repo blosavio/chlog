@@ -169,6 +169,9 @@
                   (conj (changelog-md-footer opt)))))))
 
 
+(load "chlog_defaults")
+
+
 (defn generate-all-changelogs
   "Given Chlog options `opt`, write-to-file html and markdown changeloges.
 
@@ -181,7 +184,7 @@
   Defaults supplied by `src/chlog_defaults.edn`"
   {:UUIDv4 #uuid "cb525541-2d98-4003-9ab7-777661933cf6"}
   [opt]
-  (let [options-n-defaults (merge (load-file "src/chlog/chlog_defaults.edn") opt)
+  (let [options-n-defaults (merge defaults opt)
         changelog-data (load-file (str (options-n-defaults :changelog-entries-directory) (options-n-defaults :changelog-data-file)))]
     (do (generate-chlog-html options-n-defaults changelog-data)
         (generate-chlog-markdown options-n-defaults changelog-data))))

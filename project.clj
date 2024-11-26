@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/chlog "0-SNAPSHOT0"
+(defproject com.sagevisuals/chlog "0-SNAPSHOT1"
   :description "A Clojure library for maintaining an edn changelog."
   :url "https://blosavio.github.io/chlog/home.html"
   :license {:name "MIT License"
@@ -22,5 +22,5 @@
           :doc-files []
           :source-uri "https://github.com/blosavio/chlog/blob/main/{filepath}#L{line}"
           :themes [:chlog]
-          :project {:name "Chlog" :version "version 0-SNAPSHOT0"}}
+          :project {:name "Chlog" :version "version 0-SNAPSHOT1"}}
   :scm {:name "git" :url "https://github.com/blosavio/chlog"})
