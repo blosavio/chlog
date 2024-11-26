@@ -23,7 +23,7 @@
 
  [:p "Within a changelog, seeing " [:code ":breaking? false"] " indicates that switching to that version will work as it worked before with zero other changes (including changes in dependencies). Otherwise, the change is a " [:a {:href "#breaking"} [:em "breaking change"]] ", indicated by " [:code ":breaking? true"] "."]
 
- [:p "As a rough starting guideline, the following kinds of changes are " [:strong "probably"] " breaking." ]
+ [:p "As a rough starting guideline, the following kinds of changes are " [:strong "probably"] " breaking."]
 
  [:ul
   [:li "all regressions (performance, memory, network)"]
