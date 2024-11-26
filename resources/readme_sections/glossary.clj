@@ -3,7 +3,7 @@
 
  [:dl
   [:dt#breaking "breaking"]
-  [:dd "Any change that is not " [:a {:href "#non-breaking"} [:em "non-breaking"]] "."]]
+  [:dd "Any change that is " [:strong "not"] " " [:a {:href "#non-breaking"} [:em "non-breaking"]] "."]]
 
  [:dl
   [:dt#changelog "changelog"]

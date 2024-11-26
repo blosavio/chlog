@@ -34,7 +34,8 @@
 (defn moved-fns
   "Given a sequence `o2n` of `old-location`-to-`new-location` maps, generate a
   hiccup/html unordered list of old to new."
-  {:UUIDv4 #uuid "5b5dd073-fd55-4bf7-91ae-b80657cb77c0"}
+  {:UUIDv4 #uuid "5b5dd073-fd55-4bf7-91ae-b80657cb77c0"
+   :no-doc true}
   [o2n]
   (let [sorted-fns (sort-by :fn-name o2n)]
     (reduce #(conj %1 [:li [:code (name (:fn-name %2))] " from " [:code (name (:old-location %2))] " to " [:code (name (:new-location %2))]]) [:ul] sorted-fns)))

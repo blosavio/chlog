@@ -5,7 +5,8 @@
             :url "https://opensource.org/license/mit"
             :distribution :repo}
   :dependencies [[org.clojure/clojure "1.12.0"]
-                 [org.clojure/test.check "1.1.1"]]
+                 [org.clojure/test.check "1.1.1"]
+                 [com.sagevisuals/speculoos "6"]]
   :repl-options {:init-ns chlog.core}
   :plugins []
   :profiles {:dev {:dependencies [[hiccup "2.0.0-RC3"]
@@ -15,7 +16,7 @@
                              [lein-codox "0.10.8"]]}
              :repl {}}
   :codox {:metadata {:doc/format :markdown}
-          :namespaces [#"^chlog\.(?!scratch)(?!generators)"]
+          :namespaces [#"^chlog\.(?!scratch)"]
           :target-path "doc"
           :output-path "doc"
           :doc-files []

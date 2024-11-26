@@ -1,7 +1,6 @@
 (ns chlog.changelog-specifications
   "Speculoos specifications for changelog entries."
-  {:UUIDv4 #uuid "c2d0b1f4-3af9-481d-b34a-6e96e6989a00"
-   :no-doc true}
+  {:UUIDv4 #uuid "c2d0b1f4-3af9-481d-b34a-6e96e6989a00"}
   (:require
    [clojure.set :refer [difference]]))
 
@@ -182,7 +181,7 @@
                           :project-status status?
                           :stable boolean?
                           :urgency #{:low :medium :high}
-                          :breaking? boolean?})
+                          :breaking? breaking?})
 
 
 (def changelog-scalar-spec (repeat (assoc version-scalar-spec :changes (repeat change-scalar-spec))))

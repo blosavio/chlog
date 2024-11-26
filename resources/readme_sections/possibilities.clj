@@ -4,7 +4,7 @@
  [:p "When changelog information is stored as Clojure data, it opens many intriguing possibilities."]
 
  [:ul
-  [:li [:p "Changelog data could be used to generate formatted html or markdown webpages for casual reading. Chlog currently implements this."]]
+  [:li [:p "Changelog data could be used to generate formatted " [:span.small-caps "html"] " or markdown webpages for casual reading. Chlog currently implements this."]]
 
   [:li [:p "A " [:code "js/cljs"] " widget embedded in a webpage that presents a " [:em "current version"] " selector and a " [:em "target version"] " selector. Then, based on each selection, the utility would collapse all the intervening versions and list the breaking and non-breaking changes. Someone considering switching versions could quickly click around and compare the available versions. " [:em "Switching from version 3 to version 4 introduces one breaking change"] " whereas " [:em "Switching from version 3 to version 5 involves that same breaking change, plus another breaking change in a function we don't use."] " Therefore, switching to version 4 or version 5 is equivalent."]]
 

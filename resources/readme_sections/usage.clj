@@ -55,18 +55,18 @@
  [:p "Required keys:"]
 
  [:ul
+  [:li [:p [:code ":project-name-formatted"] " Project name (string) to display on changelog html/markdown documents."]]
+  
   [:li [:p [:code ":copyright-holder"] " Name displayed in the copyright statement in the footer of the changelog."]]
   
   [:li [:p [:code ":UUID"] " Version 4 " [:strong "U"] "niversally " [:strong "U"] "nique " [:strong "Id"] "entifier. Suggestion: eval-and-replace " [:code "(random-uuid)"] ". Default " [:code "nil"] "."]]]
 
- [:p "Optional keys:"]
+ [:p "Optional keys (defaults supplied by " [:a {:href "https://github.com/blosavio/chlog/blob/main/src/chlog/chlog_defaults.edn"} [:code "chlog_defaults.edn"]] "):"]
 
  [:ul
-  [:li [:p [:code ":project-name-formatted"] " Alternative project name (string) to use in preference to the project name supplied by " [:code "defproject"] " in the " [:code "project.clj"] " file."]]
+  [:li [:p [:code ":changelog-entries-directory"] " Alternative directory to find changelog " [:code ".edn"] " files. Include trailing '/'. Defaults to " [:code "resources/changelog_entries/"] "."]]
 
-  [:li [:p [:code ":changelog-entries-directory"] " Alternative directory to find changelog " [:code ".edn"] " files. Include trailing '/'. Default " [:code "resources/changelog_entries/"] "."]]
-
-  [:li [:p [:code ":changelog-data-file"] " Alternative " [:code ".edn"] " file that contains the changelog data. May include " [:code "load-file"] "-ing for easier organization and version control. Default " [:code "changelog.edn"] "."]]
+  [:li [:p [:code ":changelog-data-file"] " Alternative " [:code ".edn"] " file that contains the changelog data. May include " [:code "load-file"] "-ing for easier organization and version control. Defaults to " [:code "changelog.edn"] "."]]
 
   [:li [:p [:code ":changelog-html-directory"] " Alternative output " [:span.small-caps "html"] " directory (string). Include trailing '/'. Defaults to 'doc/'."]]
 
