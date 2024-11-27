@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/chlog "0-SNAPSHOT1"
+(defproject com.sagevisuals/chlog "0-SNAPSHOT2"
   :description "A Clojure library for maintaining an edn changelog."
   :url "https://blosavio.github.io/chlog/home.html"
   :license {:name "MIT License"
@@ -11,7 +11,7 @@
   :plugins []
   :profiles {:dev {:dependencies [[hiccup "2.0.0-RC3"]
                                   [zprint "1.2.9"]
-                                  [com.sagevisuals/readmoi "1"]]
+                                  [com.sagevisuals/readmoi "2-SNAPSHOT0"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}
              :repl {}}
@@ -22,5 +22,5 @@
           :doc-files []
           :source-uri "https://github.com/blosavio/chlog/blob/main/{filepath}#L{line}"
           :themes [:chlog]
-          :project {:name "Chlog" :version "version 0-SNAPSHOT1"}}
+          :project {:name "Chlog" :version "version 0-SNAPSHOT2"}}
   :scm {:name "git" :url "https://github.com/blosavio/chlog"})
