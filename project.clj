@@ -21,6 +21,7 @@
           :output-path "doc"
           :doc-files []
           :source-uri "https://github.com/blosavio/chlog/blob/main/{filepath}#L{line}"
-          :themes [:chlog]
+          :html {:namespace-list :flat
+                 :transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/chlog"} "Project home"]]]]]}
           :project {:name "Chlog" :version "version 0-SNAPSHOT2"}}
   :scm {:name "git" :url "https://github.com/blosavio/chlog"})
