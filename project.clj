@@ -1,17 +1,17 @@
-(defproject com.sagevisuals/chlog "0-SNAPSHOT2"
+(defproject com.sagevisuals/chlog "0"
   :description "A Clojure library for maintaining an edn changelog."
-  :url "https://blosavio.github.io/chlog/home.html"
+  :url "https://github.com/blosavio/chlog"
   :license {:name "MIT License"
             :url "https://opensource.org/license/mit"
             :distribution :repo}
   :dependencies [[org.clojure/clojure "1.12.0"]
-                 [org.clojure/test.check "1.1.1"]
                  [com.sagevisuals/speculoos "6"]]
   :repl-options {:init-ns chlog.core}
   :plugins []
-  :profiles {:dev {:dependencies [[hiccup "2.0.0-RC3"]
+  :profiles {:dev {:dependencies [[org.clojure/test.check "1.1.1"]
+                                  [hiccup "2.0.0-RC3"]
                                   [zprint "1.2.9"]
-                                  [com.sagevisuals/readmoi "2-SNAPSHOT0"]]
+                                  [com.sagevisuals/readmoi "2"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}
              :repl {}}
@@ -21,7 +21,6 @@
           :output-path "doc"
           :doc-files []
           :source-uri "https://github.com/blosavio/chlog/blob/main/{filepath}#L{line}"
-          :html {:namespace-list :flat
-                 :transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/chlog"} "Project home"]]]]]}
-          :project {:name "Chlog" :version "version 0-SNAPSHOT2"}}
+          :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/chlog"} "Project home"]]]]]}
+          :project {:name "Chlog" :version "version 0"}}
   :scm {:name "git" :url "https://github.com/blosavio/chlog"})
