@@ -187,4 +187,7 @@
   (let [options-n-defaults (merge chlog-defaults opt)
         changelog-data (load-file (str (options-n-defaults :changelog-entries-directory) (options-n-defaults :changelog-data-file)))]
     (do (generate-chlog-html options-n-defaults changelog-data)
-        (generate-chlog-markdown options-n-defaults changelog-data))))
+        (generate-chlog-markdown options-n-defaults changelog-data)
+        (if (options-n-defaults :tidy-html?)
+          (do (tidy-html-document (str (options-n-defaults :changelog-html-directory) (options-n-defaults :changelog-html-filename)))
+              (tidy-html-body (str (options-n-defaults :changelog-markdown-directory) (options-n-defaults :changelog-markdown-filename))))))))

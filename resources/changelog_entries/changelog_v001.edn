@@ -1,0 +1,18 @@
+{:date {:year 2024
+        :month "December"
+        :day 6}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 1
+ :comment "Added html tidy-ing option."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? false
+ :changes
+ [{:description "Added option to tidy html in output files, with associated additional defaults."
+   :date {:year 2024
+          :month "December"
+          :day 6}
+   :change-type :increased-return
+   :breaking? false}]}

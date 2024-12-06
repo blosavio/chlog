@@ -74,7 +74,9 @@
 
   [:li [:p [:code ":changelog-markdown-directory"] " Alternative output markdown directory (string). Include trailing `/`. Defaults to '' (i.e., project's root directory)."]]
 
-  [:li [:p [:code ":changelog-markdown-filename"] " Alternative output markdown filename (string). Defaults to 'changelog.md'."]]]
+  [:li [:p [:code ":changelog-markdown-filename"] " Alternative output markdown filename (string). Defaults to 'changelog.md'."]]
+
+  [:li [:p [:code ":tidy-html?"] " Indent and wrap " [:span.small-caps "html"] " and markdown files. Defaults to " [:code "false"] "."]]]
  
  [:h3 "Generating the changelog documents"]
 
