@@ -13,6 +13,8 @@
   * `:changelog-entries-directory`
   * `:changelog-policies-section` (optional)"
   (:require
+   [clojure.java.io :as io]
+   [clojure.string :as str]
    [hiccup2.core :as h2]
    [hiccup.page :as page]
    [hiccup.element :as element]
@@ -98,7 +100,7 @@
                                                          nil
                                                          (into [:div [:em (str label " functions: ")]] something-ized-fn))))]
     [:section
-     [:h3 (str "version " (:version m))]
+     [(keyword (str "h3#v" (:version m))) (str "version " (:version m))]
      [:p
       (str (:year (:date m)) " "
            (:month (:date m)) " "
@@ -169,6 +171,32 @@
                   (conj (changelog-md-footer opt)))))))
 
 
+(defn get-filenames
+  "Given options hashmap `opt`, returns a sequence of filepath strings of all
+  changelos in `:changelog-entries-directory`."
+  {:UUIDv4 #uuid "61d88ebf-3896-44b4-8c29-97c0a0e9919a"
+   :no-doc true}
+  [opt]
+  (let [prefix (str (opt :changelog-entries-directory)
+                    "changelog_v")
+        suffix ".edn"]
+    (->> (opt :changelog-entries-directory)
+         io/file
+         file-seq
+         (map #(.toString %))
+         (filter #(and (str/starts-with? % prefix)
+                       (str/ends-with? % suffix))))))
+
+
+(defn load-changelogs
+  "Given an options hashmap `opt`, returns a vector containing the changelogs,
+  each element a hashmap."
+  {:UUIDv4 #uuid "f182cd59-c234-4eb4-b30f-c1b3df95bdd3"
+   :no-doc true}
+  [opt]
+  (sort-by :version (map #(load-file %) (get-filenames opt))))
+
+
 (load "chlog_defaults")
 
 
@@ -185,9 +213,45 @@
   {:UUIDv4 #uuid "cb525541-2d98-4003-9ab7-777661933cf6"}
   [opt]
   (let [options-n-defaults (merge chlog-defaults opt)
-        changelog-data (load-file (str (options-n-defaults :changelog-entries-directory) (options-n-defaults :changelog-data-file)))]
+        changelog-data (load-changelogs options-n-defaults)]
     (do (generate-chlog-html options-n-defaults changelog-data)
         (generate-chlog-markdown options-n-defaults changelog-data)
         (if (options-n-defaults :tidy-html?)
-          (do (tidy-html-document (str (options-n-defaults :changelog-html-directory) (options-n-defaults :changelog-html-filename)))
-              (tidy-html-body (str (options-n-defaults :changelog-markdown-directory) (options-n-defaults :changelog-markdown-filename))))))))
+          (do (tidy-html-document (str (options-n-defaults :changelog-html-directory)
+                                       (options-n-defaults :changelog-html-filename)))
+              (tidy-html-body (str (options-n-defaults :changelog-markdown-directory)
+                                   (options-n-defaults :changelog-markdown-filename))))))))
+
+
+(defn -main
+  "Generate an html and a markdown changelog, sourcing options from file
+  `options-filename` if supplied, otherwise `resources/chlog_options.edn`.
+
+  Examples:
+  ```clojure
+  ;; generate changelog using options from 'resources/chlog_options.edn'
+  (-main)
+
+  ;; generate changelog using options from 'other_directory/custom_changelog_opt.edn'
+  (-main \"other_directory/custom_changelog_opt.edn\")
+  ```
+
+  From the command line, options file defaults to `resources/chlog_options.edn`:
+  ```bash
+  $ lein run -m chlog.core
+  ```
+
+  From the command line, explicit options file `other_directory/custom_changelog_opt.edn`:
+  ```bash
+  $ lein run -m chlog.core other_directory/custom_changelog_opt.edn
+  ```"
+  [& options-filename]
+  {:UUIDv4 #uuid "5278c15f-6986-4868-b38a-e47234f19669"}
+  (let [opt-fname (or (first options-filename)
+                      "resources/chlog_options.edn")
+        opt (load-file opt-fname)]
+    (do
+      (generate-all-changelogs opt)
+      (if (not *repl*)
+        (System/exit 0)))))
+

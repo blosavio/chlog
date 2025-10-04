@@ -1,0 +1,53 @@
+{:date {:year 2025
+        :month "October"
+        :day 4}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 2
+ :comment "Various quality-of-life improvements."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? false
+ :changes
+ [{:description "Added html IDs to section headers to enable hyperlinking to
+ specific changelog entries."
+   :date {:year 2025
+          :month "October"
+          :day 4}
+   :change-type :increased-return
+   :breaking? false
+   :reference {:source "GitHub Issue #1"
+               :url "https://github.com/blosavio/chlog/issues/1"}}
+
+  {:description "Loading changelog entry files is now automatic, eliminating the
+ requirement for manually maintaining a global 'changelog.edn'."
+   :date {:year 2025
+          :month "October"
+          :day 4}
+   :change-type :decreased-requirements
+   :breaking? false
+   :reference {:source "GitHub Issue #2"
+               :url "https://github.com/blosavio/chlog/issues/2"}}
+
+  {:description "Added a `-main` entry point, so that generating changelogs may
+ be initiated from a repl or the command line."
+   :date {:year 2025
+          :month "October"
+          :day 4}
+   :change-type :added-functions
+   :added-functions ['-main]
+   :breaking? false
+   :reference {:source "GitHub Issue #3"
+               :url "https://github.com/blosavio/chlog/issues/3"}}
+
+  {:description "The new `-main` function accepts alternative options file
+ locations."
+   :date {:year 2025
+          :month "October"
+          :day 4}
+   :change-type :relaxed-input-requirements
+   :breaking? false
+   :reference {:source "GitHub Issue #4"
+               :url "https://github.com/blosavio/chlog/issues/4"}}]}
+

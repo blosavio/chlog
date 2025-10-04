@@ -41,54 +41,55 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/chlog &quot;1&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/chlog &quot;2-SNAPSHOT0&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;1&quot;}</code></pre>
+      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;2-SNAPSHOT0&quot;}</code></pre>
       <h3>
         Require
       </h3>
-      <pre><code>(require &apos;[chlog.core :refer [generate-all-changelogs]])</code></pre>
+      <pre><code>(require &apos;[chlog.core :refer [-main]])</code></pre>
     </section>
     <section id="intro">
       <h2>
         Introduction
       </h2>
       <p>
-        Q: <em>What will happen if we switch from this version to that version?</em>
+        Q: <em>What will happen if we switch from this version to that &nbsp;version?</em>
       </p>
       <p>
         A: <em>Consult the changelog, not the version number.</em>
       </p>
       <p>
-        We ask too much of our software version numbers, and we should expect more from our changelogs. A <code>major.minor.patch</code> sequence of numbers
-        simply doesn&apos;t have enough bandwidth to tell us how to make good decisions about switching versions. On the other hand, <span class=
-        "small-caps">html</span>/markdown changelogs could potentially convey that information, but require a person to read and interpret it.
+        We ask too much of our software version numbers, and we should expect more &nbsp;from our changelogs. A <code>major.minor.patch</code> sequence of
+        numbers simply doesn&apos;t have enough bandwidth to tell us how to &nbsp;make good decisions about switching versions. On the other hand, <span class=
+        "small-caps">html</span>/markdown changelogs could potentially convey that information, but require &nbsp;a person to read and interpret it.
       </p>
       <p>
-        Ideally, a changelog would contain a compact representation of what changed from one version to the next, and operational implications of those
-        changes. If we use functions <code>foo</code> and <code>bar</code>, but only function <code>baz</code> changed, it&apos;s safe to switch. Or, function
-        <code>baz</code> changed and we use it, but the change is non-breaking, so, again, it&apos;s safe to switch. Or, maybe <code>baz</code> was changed in
-        a way that does break the way we use it, but the changelog tells us why it changed and how to manage the switch.
+        Ideally, a changelog would contain a compact representation of what &nbsp;changed from one version to the next, and operational implications of those
+        &nbsp;changes. If we use functions <code>foo</code> and <code>bar</code>, but only function <code>baz</code> changed, it&apos;s safe to switch. Or,
+        function <code>baz</code> changed and we use it, but the change is non-breaking, so, again, it&apos;s safe &nbsp;to switch. Or, maybe <code>baz</code>
+        was changed in a way that <em>does</em> break the way we use it, but the changelog tells us why it changed and how &nbsp;to manage the switch.
       </p>
       <p>
         Changelogs are often served as <a href="https://clojure.org/releases/devchangelog"><span class="small-caps">html</span></a> or <a href=
         "https://codeberg.org/leiningen/leiningen/raw/branch/main/resources/leiningen/new/template/CHANGELOG.md">markdown</a> files, intended for people to
-        read. But to convey the depth of information we&apos;re talking about requires a high-level of discipline by the authors to comprehensively write all
-        that out. Mistakes and omissions are bound to happen with free-form text, not to mention irregularities that thwart parsing, and in the end, a person
-        has to synthesize a lot of bits to make a decision. <span class="small-caps">html</span>/markdown is ill-suited for this purpose.
+        read. But to convey the depth of information &nbsp;we&apos;re talking about requires a high-level of discipline by the authors to &nbsp;comprehensively
+        write all that out. Mistakes and omissions are bound to happen &nbsp;with free-form text, not to mention irregularities that thwart parsing, and in
+        &nbsp;the end, a person has to synthesize a lot of bits to make a decision. <span class="small-caps">html</span>/markdown is ill-suited for this
+        purpose.
       </p>
       <p>
-        Storing a changelog in Clojure data structures offers many potential benefits. The data can be written, stored, retrieved, and manipulated
-        programmatically. It can be <a href="https://github.com/blosavio/speculoos">validated</a> for correctness and completeness. And we could write <a href=
-        "#possibilities">utilities</a> that answer detailed questions about what it would be like to switch from one version to another.
+        Storing a changelog in Clojure data structures offers many potential &nbsp;benefits. The data can be written, stored, retrieved, and manipulated
+        &nbsp;programmatically. It can be <a href="https://github.com/blosavio/speculoos">validated</a> for correctness and completeness. And we could write
+        <a href="#possibilities">utilities</a> that answer detailed questions about what it would be like to switch from &nbsp;one version to another.
       </p>
       <p>
-        Chlog is a library that tests these ideas. It encompasses several parts. First, it promotes a set of <a href="#ideas">ideas</a>, some of which
-        we&apos;ve already mentioned. Second, Chlog proposes a set of specifications for such a changelog. Third, Chlog offers an experimental implementation
-        that maintains an <code>.edn</code> changelog specification, validates it, and generates easily-readable <span class="small-caps">html</span> and
-        markdown webpages based upon the changelog data.
+        Chlog is a library that tests these ideas. It encompasses several parts. &nbsp;First, it promotes a set of <a href="#ideas">ideas</a>, some of which
+        we&apos;ve already mentioned. Second, Chlog proposes a set of &nbsp;specifications for such a changelog. Third, Chlog offers an experimental
+        &nbsp;implementation that maintains an <code>.edn</code> changelog specification, validates it, and generates easily-readable <span class=
+        "small-caps">html</span> and markdown webpages based upon the changelog data.
       </p>
       <p>
         The resulting changelog looks like <a href="https://github.com/blosavio/chlog/blob/main/changelog.md">this</a>.
@@ -103,46 +104,46 @@
       </h3>
       <p>
         Versioning software with <code>major.minor.patch</code> numbers attempt to convey the notion <em>Yes, we can safely upgrade to such-and-such
-        version</em>. But the granularity is poor. What if a dependency does have a breaking change, but the breaking change is in a portion of the dependency
-        that we don&apos;t use. Version numbers ought to merely be a label to differentiate one release from another.
+        version</em>. But the granularity is poor. What if a dependency does have a breaking &nbsp;change, but the breaking change is in a portion of the
+        dependency that we don&apos;t &nbsp;use. Version numbers ought to merely be a label to differentiate one release &nbsp;from another.
       </p>
       <p>
-        If a version number is merely a label without semantics, how would someone judge whether to switch from one version to another? A detailed, concise,
-        regularly-formatted changelog conveys all the information necessary to make an informed decision about if there is any benefit to change versions, if
-        changing version will require changes to on the consuming side, and if so, what changes are necessary.
+        If a version number is merely a label without semantics, how would someone &nbsp;judge whether to switch from one version to another? A detailed,
+        concise, &nbsp;regularly-formatted changelog conveys all the information necessary to make an &nbsp;informed decision about if there is any benefit to
+        change versions, if changing &nbsp;version will require changes to the consuming side, and if so, what changes are &nbsp;necessary.
       </p>
       <p>
-        A later version is not promised to be <em>better</em>, merely different. The changelog authors will provide dispassionate information about the
-        changes, and the people using the software can decide whether it is worth switching.
+        A later version is not promised to be <em>better</em>, merely different. The changelog authors will provide dispassionate &nbsp;information about the
+        changes, and the people using the software can decide &nbsp;whether it is worth switching.
       </p>
       <p>
-        Chlog is an experiment to detangle version numbers from changelog information. A version number <code>n</code> makes no claim other than it was
+        Chlog is an experiment to detangle version numbers from changelog &nbsp;information. A version number <code>n</code> makes no claim other than it was
         released some time later than version <code>n-1</code>.
       </p>
       <h3>
         A changelog is data
       </h3>
       <p>
-        The <code>changelog.edn</code> is the single, canonical source of information. All other representations (<span class=
+        The changelog <code>edn</code> files are the canonical sources of information. All other representations (<span class=
         "small-caps">html</span>/markdown, etc) are derived from that and are merely conveniences.
       </p>
       <p id="info">
-        A human- and machine-readable <code>changelog.edn</code> will accompany each version. <code>changelog.edn</code> is a tail-appended file constructed
-        from all previous releases, possibly automatically-composed of per-version <code>changelog-v<em>N</em>.edn</code> files in a sub-directory.
+        A human- and machine-readable <code>edn</code> file will accompany each version. The global changelog is a sequence &nbsp;constructed by concatenating
+        those hashmaps from all previous releases, i.e., &nbsp;the per-version <code>changelog-v<em>N</em>.edn</code> files in a designated sub-directory.
       </p>
       <h3>
         A low threshold for breakage
       </h3>
       <p>
-        The Chlog experiment focuses on the changelog being the sole source of information on what will happen when switching versions. For that to succeed,
-        the entries must accurately communicate whether a change is breaking. Not every change can be objectively categorized as either breaking or
-        non-breaking (more on that in a moment). To have empathy for other people is tricky. If all changes are claimed as breaking, the concept loses its
-        meaning and purpose. But if a supposedly safe change ends up breaking for someone else, trust is lost.
+        The Chlog experiment focuses on the changelog being the sole source of &nbsp;information on what will happen when switching versions. For that to
+        succeed, &nbsp;the entries must accurately communicate whether a change is breaking. Not every &nbsp;change can be objectively categorized as either
+        breaking or non-breaking (more &nbsp;on that in a moment). To have empathy for other people is tricky. If all &nbsp;changes are claimed as breaking,
+        the concept loses its meaning and purpose. But &nbsp;if a supposedly safe change ends up breaking for someone else, trust is lost.
       </p>
       <p>
-        Within a changelog, seeing <code>:breaking? false</code> indicates that switching to that version will work as it worked before with zero other changes
-        (including changes in dependencies). Otherwise, the change is a <a href="#breaking"><em>breaking change</em></a>, indicated by <code>:breaking?
-        true</code>.
+        Within a changelog, seeing <code>:breaking? false</code> declares that switching to that version will work as it worked before with &nbsp;zero other
+        changes (including changes in dependencies). Otherwise, the change &nbsp;is a <a href="#breaking"><em>breaking change</em></a>, explicitly indicated by
+        <code>:breaking? true</code>.
       </p>
       <p>
         As a rough starting guideline, the following kinds of changes are <strong>probably</strong> breaking.
@@ -187,21 +188,21 @@
         </li>
       </ul>
       <p>
-        These are just starting guidelines. Careful judgment may say that a change in a function&apos;s defaults will in all cases be a non-breaking change.
-        Or, a change in the documentation might be so severe that it&apos;s elevated to a breaking change.
+        These are just starting guidelines. Careful judgment may say that a change &nbsp;in a function&apos;s defaults will in all cases be a non-breaking
+        change. Or, a &nbsp;change in the documentation might be so severe that it&apos;s elevated to a breaking &nbsp;change.
       </p>
       <p>
-        One important kind of change that kinda defies categorization is bug-fixes. According to the notion that a non-breaking change must be a perfect
-        drop-in replacement, a bug fix would classify as a breaking change. Tentative policy: Bug fixes are non-breaking changes, but it depends on the
-        scenario.
+        One important kind of change that sorta defies categorization is &nbsp;bug-fixes. According to the notion that a non-breaking change must be a perfect
+        &nbsp;drop-in replacement, a bug fix would classify as a breaking change. Tentative &nbsp;policy: Bug fixes are non-breaking changes, but it depends on
+        the scenario.
       </p>
       <h3>
         Formal specifications state required information
       </h3>
       <p>
-        Each version has required information that is explicitly delineated in the <a href=
+        Each version has required information that is explicitly delineated in &nbsp;the <a href=
         "https://github.com/blosavio/chlog/blob/main/src/chlog/changelog_specifications.clj">specifications</a>. Correctness of a changelog, or any
-        sub-component of the changelog, may be verified by <a href="https://blosavio.github.io/chlog/chlog.changelog-validations.html">validating</a> the
+        sub-component of the changelog, may be &nbsp;verified by <a href="https://blosavio.github.io/chlog/chlog.changelog-validations.html">validating</a> the
         changelog against those specifications.
       </p>
       <h3>
@@ -210,20 +211,20 @@
       <ul>
         <li>
           <p>
-            A changelog is mutable. Corrections are encouraged and additions are okay. The changelog itself is versioned-controlled data, and the <span class=
-            "small-caps">html</span>/markdown documents that are generated from the changelog data are also under version-control.
+            A changelog is mutable. Corrections are encouraged and additions are &nbsp;okay. The changelog itself is versioned-controlled data, and the
+            <span class="small-caps">html</span>/markdown documents that are generated from the changelog data are also &nbsp;under version-control.
           </p>
         </li>
         <li>
           <p>
-            Yanked or retracted releases can simply be noted by revising the changelog data.
+            Yanked or retracted releases can simply be noted by revising the &nbsp;changelog data.
           </p>
         </li>
         <li>
           <p>
-            Much of the changelog data is objective (e.g., dates, email), but some is merely the changelog author&apos;s opinions. That&apos;s okay. The
-            changelog author is communicating that opinion to the person considering switching versions. The changelog author may consider a particular bug-fix
-            <code>:high</code> urgency, but the person using the software may not.
+            Much of the changelog data is objective (e.g., dates, email), but &nbsp;some is merely the changelog author&apos;s opinions. That&apos;s okay. The
+            changelog &nbsp;author is communicating that opinion to the person considering switching &nbsp;versions. The changelog author may consider a
+            particular bug-fix <code>:high</code> urgency, but the person using the software may not.
           </p>
         </li>
       </ul>
@@ -233,7 +234,7 @@
         Usage
       </h2>
       <p>
-        There are four components to using Chlog.
+        There are four steps to using Chlog.
       </p>
       <ol>
         <li>
@@ -261,8 +262,8 @@
         Changelog information is Clojure data
       </h3>
       <p>
-        Changelog information is stored as a series of nested collections in <code>.edn</code> files. Every <a href="#version"><em>version</em></a> is
-        represented by the following map.
+        Changelog information is built by concatenating hashmaps contained in <code>.edn</code> files located in the <a href="#entries">changelog entries
+        directory</a>, one file per version. Every <a href="#version"><em>version</em></a> is represented by the following hashmap.
       </p>
       <pre><code>{:version ___
 &nbsp;:date {:year ___
@@ -288,13 +289,13 @@
           <strong>version</strong> is an integer.
         </li>
         <li>
-          <strong>date</strong> is a map of integer year, string month, and integer day
+          <strong>date</strong> is a map of integer year, string month, and integer &nbsp;day
         </li>
         <li>
           <strong>responsible</strong> is a map of a name string and an email string.
         </li>
         <li>
-          <strong>project-status</strong> is one of enumerated keywords borrowed from the <a href=
+          <strong>project-status</strong> is one of enumerated keywords borrowed from &nbsp;the <a href=
           "https://github.com/metosin/open-source/blob/main/project-status.md">Metosin description</a>.
         </li>
         <li>
@@ -307,12 +308,12 @@
           <strong>comment</strong> is a free-form string.
         </li>
         <li>
-          <strong>changes</strong> a vector of <em>change</em> maps (discussed soon).
+          <strong>changes</strong> is a vector of <em>change</em> maps (discussed soon).
         </li>
       </ul>
       <p>
-        A <a href="#changelog">changelog</a> is a tail-appended vector of one or more such <em>version</em> hash-maps. Furthermore, a version hash-map may have
-        zero or more <a href="#change"><em>change</em></a> hash-maps associated to the <code>:changes</code> key. A <em>change</em> hash-map looks like this.
+        A <a href="#changelog">changelog</a> is a tail-appended sequence of one or more such <em>version</em> hashmaps. Furthermore, a version hashmap may have
+        zero or more <a href="#change"><em>change</em></a> hashmaps associated to the <code>:changes</code> key. A <em>change</em> hashmap looks like this.
       </p>
       <pre><code>{:description ___
 &nbsp;:reference {:source ___
@@ -330,7 +331,7 @@
         <code>:deprecated-functions</code>, <code>:moved-functions</code>, <code>:removed-functions</code>, and <code>:renamed-functions</code>.
       </p>
       <p>
-        The parts of a change hash-map are:
+        The parts of a change hashmap are:
       </p>
       <ul>
         <li>
@@ -346,7 +347,7 @@
           <strong>altered-functions</strong> a vector of symbols that were altered in this change.
         </li>
         <li>
-          <strong>responsible</strong> a hash-map of a name string and an email string.
+          <strong>responsible</strong> a hashmap of a name string and an email string.
         </li>
         <li>
           <strong>change-type</strong> a keyword from an <a href=
@@ -361,13 +362,18 @@
         <code>update-in</code>, etc. Chlog includes specifications for changelog data and utilities for performing those validations, but any validation
         facility, such as <code>clojure.spec.alpha</code>, may be used.
       </p>
+      <p>
+        Note: Chlog consults <em>every</em> file in the changelog entries directory that begins with <code>changelog_v</code> and ends with <code>.edn</code>.
+        Between those required bookends, files may be named according to whatever &nbsp;may be convienient, e.g., integers padded with zeros for human-readable
+        sorting &nbsp;in the local filesystem or desktop environment.
+      </p>
       <h3>
         Creating an <em>options</em> file
       </h3>
       <p>
         The <em>options</em> file is an <a href="https://github.com/edn-format/edn">edn</a> file (<a href=
         "https://github.com/blosavio/chlog/blob/main/resources/chlog_options.edn">example</a>) that contains a map which supplies required information for
-        generating a changelog. It also declares preferences for other optional settings.
+        generating a &nbsp;changelog. It also declares preferences for other optional settings.
       </p>
       <p>
         Required keys:
@@ -375,12 +381,12 @@
       <ul>
         <li>
           <p>
-            <code>:project-name-formatted</code> Project name (string) to display on changelog html/markdown documents.
+            <code>:project-name-formatted</code> Project name (string) to display on changelog html/markdown &nbsp;documents.
           </p>
         </li>
         <li>
           <p>
-            <code>:copyright-holder</code> Name displayed in the copyright statement in the footer of the changelog.
+            <code>:copyright-holder</code> Name displayed in the copyright statement in the footer of the &nbsp;changelog.
           </p>
         </li>
         <li>
@@ -392,10 +398,10 @@
       </ul>
       <p>
         Optional keys (defaults supplied by <a href=
-        "https://github.com/blosavio/chlog/blob/main/src/chlog/chlog_defaults.edn"><code>chlog_defaults.edn</code></a>):
+        "https://github.com/blosavio/chlog/blob/main/src/chlog/chlog_defaults.clj"><code>chlog_defaults.clj</code></a>):
       </p>
       <ul>
-        <li>
+        <li id="entries">
           <p>
             <code>:changelog-entries-directory</code> Alternative directory to find changelog <code>.edn</code> files. Include trailing &apos;/&apos;. Defaults
             to <code>resources/changelog_entries/</code>.
@@ -403,31 +409,25 @@
         </li>
         <li>
           <p>
-            <code>:changelog-data-file</code> Alternative <code>.edn</code> file that contains the changelog data. May include <code>load-file</code>-ing for
-            easier organization and version control. Defaults to <code>changelog.edn</code>.
-          </p>
-        </li>
-        <li>
-          <p>
             <code>:changelog-html-directory</code> Alternative output <span class="small-caps">html</span> directory (string). Include trailing &apos;/&apos;.
-            Defaults to &apos;doc/&apos;.
+            Defaults to <code>doc/</code>.
           </p>
         </li>
         <li>
           <p>
             <code>:changelog-html-filename</code> Alternative output <span class="small-caps">html</span> filename (string). Defaults to
-            &apos;changelog.html&apos;.
+            <code>changelog.html</code>.
           </p>
         </li>
         <li>
           <p>
-            <code>:changelog-markdown-directory</code> Alternative output markdown directory (string). Include trailing `/`. Defaults to &apos;&apos; (i.e.,
-            project&apos;s root directory).
+            <code>:changelog-markdown-directory</code> Alternative output markdown directory (string). Include trailing `/`. &nbsp;Defaults to
+            <code>&apos;&apos;</code> (i.e., project&apos;s root directory).
           </p>
         </li>
         <li>
           <p>
-            <code>:changelog-markdown-filename</code> Alternative output markdown filename (string). Defaults to &apos;changelog.md&apos;.
+            <code>:changelog-markdown-filename</code> Alternative output markdown filename (string). Defaults to <code>changelog.md</code>.
           </p>
         </li>
         <li>
@@ -443,20 +443,19 @@
         The Chlog library generates <span class="small-caps">html</span> and markdown changelog files from <a href=
         "https://github.com/weavejester/hiccup">hiccup</a> source. To generate the <span class="small-caps">html</span> and markdown files. We could evaluate…
       </p>
-      <pre><code>(generate-all-changelogs (load-file &quot;resources/chlog_options.edn&quot;))</code></pre>
+      <pre><code>(-main &quot;resources/chlog_options.edn&quot;)</code></pre>
       <p>
-        …in whatever namespace we loaded <code>generate-all-changelogs</code>. Or, we could copy <a href=
-        "https://github.com/blosavio/chlog/tree/main/resources/chlog_generator.clj"><code>resources/chlog_generator.clj</code></a> and evaluate all forms in
-        the namespace (<span class="small-caps">cider</span> command <code>C-c C-k</code>).
+        …in our <span class="small-caps">repl</span>-attached editor. Or, we run the <code>-main</code> function from command line something like this.
       </p>
+      <pre><code>$ lein run -m chlog.core</code></pre>
       <p>
         Chlog produces two files. The first is a &apos;markdown&apos; file that&apos;s actually plain old <span class="small-caps">html</span>, abusing the
         fact that <span class="small-caps">html</span> passes through the markdown converter. By default, this markdown file is written to the project&apos;s
         root directory where GitHub can find and display the changelog. We don&apos;t need a dedicated markdown converter to view this file; copy it to a
         <a href="https://gist.github.com/">GitHub gist</a> and it&apos;ll display similarly to when we view it on GitHub. The second file, by default written
         to the <code>resources/</code> directory, is a proper <span class="small-caps">html</span> document with a <code>&lt;head&gt;</code>, etc., that is
-        viewable in any browser. We may want to copy over the <a href="https://github.com/blosavio/chlog/blob/main/doc/project.css">css file</a> for some
-        minimal styling.
+        viewable in any browser. We may want to copy over the <a href="https://github.com/blosavio/chlog/blob/main/doc/project.css">css file</a> for some light
+        styling.
       </p>
     </section>
     <section id="possibilities">
@@ -497,11 +496,11 @@
         Critique
       </h2>
       <p>
-        On the one hand, making the changelog normalized data lends itself to straightforward analysis web display. On the other hand, is it a strategic
-        mistake to require that every change be a member of an enumerated set? Is having a change-kind <code>:other</code> a red flag? It&apos;s fairly typical
-        for one of my commits be include an update to the source code, accompanied by some additional unit tests, and some kind of change in the documentation.
-        At the moment, I would categorize it as a <code>:altered-function</code>, with the implicit understanding that a person reading the changelog would
-        care about that the most, and that the accompanying unit tests and docs are subordinate.
+        On the one hand, making the changelog normalized data lends itself to straightforward analysis and display on the web. On the other hand, is it a
+        strategic mistake to require that every change be a member of an enumerated set? Is having a change-kind <code>:other</code> a red flag? It&apos;s
+        fairly typical for one of my commits be include an update to the source code, accompanied by some additional unit tests, and some kind of change in the
+        documentation. At the moment, I would categorize it as a <code>:altered-function</code>, with the implicit understanding that a person reading the
+        changelog would care about that the most, and that the accompanying unit tests and docs are subordinate.
       </p>
       <p>
         But the rigidity causes concern, and perhaps only extended use will reveal if it&apos;s a deal-breaker.
@@ -576,7 +575,9 @@
           breaking
         </dt>
         <dd>
-          Any change that is <strong>not</strong> <a href="#non-breaking"><em>non-breaking</em></a>.
+          <p>
+            Any change that is <strong>not</strong> <a href="#non-breaking"><em>non-breaking</em></a>.
+          </p>
         </dd>
       </dl>
       <dl>
@@ -585,9 +586,9 @@
         </dt>
         <dd>
           <p>
-            A sequence of notable versions of project. Concretely, a tail-appended vector containing one or more <a href="#version">version</a> hash-maps.
-            Typically resides in an .edn file where Chlog can locate it. The changelog contains information about the software that helps people understand
-            what will happen when switching from one version of the software to another.
+            A sequence of notable versions of project. Concretely, a tail-appended sequence containing one or more <a href="#version">version</a> hashmaps.
+            Typically resides in an <code>.edn</code> file where Chlog can locate it. The changelog contains information about the software that helps people
+            understand what will happen when switching from one version of the software to another.
           </p>
         </dd>
       </dl>
@@ -597,30 +598,30 @@
         </dt>
         <dd>
           <p>
-            Within a version, a report of some facet of the software that is different. Concretely, a hash-map containing information about the change kind
+            Within a version, a report of some facet of the software that is different. Concretely, a hashmap containing information about the change kind
             (e.g., added function, deprecated function, implementation change, performance improvement, bug-fix, etc.), person responsible, namespaced function
             symbols involved, and an issue reference (e.g., GitHub issue number, JIRA ticket, etc.).
           </p>
         </dd>
+      </dl>
+      <dl>
+        <dt id="non-breaking">
+          non-breaking
+        </dt>
         <dd>
-          <dl>
-            <dt id="non-breaking">
-              non-breaking
-            </dt>
-            <dd>
-              <p>
-                A change that can be installed with zero other adjustments and the consuming software will work as before. Otherwise, the change is <a href=
-                "#breaking"><em>breaking</em></a>.
-              </p>
-            </dd>
-          </dl>
+          <p>
+            A change that can be installed with zero other adjustments and the consuming software will work as before. Otherwise, the change is <a href=
+            "#breaking"><em>breaking</em></a>.
+          </p>
         </dd>
+      </dl>
+      <dl>
         <dt id="version">
           version
         </dt>
         <dd>
           <p>
-            A notable release of software, labeled by a version number. Concretely, a hash-map containing information about the release date, the person
+            A notable release of software, labeled by a version number. Concretely, a hashmap containing information about the release date, the person
             responsible, the urgency of switching, breakage, free-form description, and a listing of zero or more detailed <a href="#change">changes</a>.
           </p>
         </dd>
@@ -635,8 +636,8 @@
     </p>
     <p></p>
     <p id="page-footer">
-      Copyright © 2024 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2024 December 08.<span id="uuid"><br>
+      Copyright © 2024–2025 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 04.<span id="uuid"><br>
       e0d63371-4eb7-4431-a5f1-1cf0f5c46a72</span>
     </p>
   </body>

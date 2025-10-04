@@ -13,3 +13,4 @@
    [:p "Changelogs, on the other hand, should clearly and concisely communicate, to people " [:em "using"] " the software, the differences between one version and another. It could be fine- or coarse-grained, but the freedom to decide should be independent of the version control commit log. Authoring a changelog requires care, judgment, and empathy for people ultimately using the software, and is a task somewhat different from wrangling version control commit messages."]]]
 
  [:p "Even at this early stage of its life, Chlog can alleviate most of that labor. Keep the changelog as " [:code ".edn"] " data, and Chlog will take care of the " [:span.small-caps "html"] "/markdown."]]
+

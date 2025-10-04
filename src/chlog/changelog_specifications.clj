@@ -171,6 +171,12 @@
                          :removed-functions (repeat symbol?)})
 
 
+;; Basic `:urgency` policies
+;;   `:low` documentation changes, formatting changes
+;;   `:medium` non-high-urgency bug fixes, new features
+;;   `:high` security, data corruption, denial-of-service fixes
+
+
 (defn version? [i] (and (int? i) (<= 0 i)))
 
 

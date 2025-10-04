@@ -4,7 +4,7 @@
       Gondor library changelog
     </h1><a href="https://example.com">Alternative changelog policies</a>
     <section>
-      <h3>
+      <h3 id="v101">
         version 101
       </h3>
       <p>
@@ -44,7 +44,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v100">
         version 100
       </h3>
       <p>
@@ -128,7 +128,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v99">
         version 99
       </h3>
       <p>
@@ -153,8 +153,8 @@
       <hr>
     </section>
     <p id="page-footer">
-      Copyright © 2024 Gandalf Greyhame.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2024 December 06.<span id="uuid"><br>
+      Copyright © 2024–2025 Gandalf Greyhame.<br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 04.<span id="uuid"><br>
       2dc2eec7-9bfa-429d-94a2-9e9b50ce561d</span>
     </p>
   </body>

@@ -109,7 +109,7 @@
                                           :reference {:source "Issue #1"
                                                       :url "https://example.com"}}]})
     [:section
-     [:h3 "version 99"]
+     [:h3#v99 "version 99"]
      [:p
       "1999 Month 0" [:br]
       "Foo Bar (FooBar@example.com)" [:br]
@@ -142,4 +142,5 @@
            (readmoi.core/short-date))))
 
 
-(run-tests)
+#_(run-tests)
+
