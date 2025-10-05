@@ -17,11 +17,12 @@
    [:p "A sequence of notable versions of project. Concretely, a tail-appended
  sequence containing one or more "
     [:a {:href "#version"} "version"]
-    " hashmaps. Typically resides in an "
-    [:code ".edn"]
-    " file where Chlog can locate it. The changelog contains information about
- the software that helps people understand what will happen when switching from
- one version of the software to another."]]]
+    " hashmaps. Typically organized into multiple "
+    [:code "edn"]
+    " files located in a known directory where Chlog can locate it. The
+ changelog contains information about the software that helps people understand
+ what will happen when switching from one version of the software to
+ another."]]]
 
  [:dl
   [:dt#change "change"]
@@ -37,7 +38,7 @@
   [:dt#non-breaking "non-breaking"]
   [:dd
    [:p "A change that can be installed with zero other adjustments and the
- consuming software will work as before. Otherwise, the change is "
+ consuming software will work exactly as before. Otherwise, the change is "
     [:a {:href "#breaking"} [:em "breaking"]]
     "."]]]
 

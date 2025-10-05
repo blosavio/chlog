@@ -3,7 +3,7 @@
 
  [:p "Q: " [:em "What will happen if we switch from this version to that
  version?"]]
- 
+
  [:p "A: " [:em "Consult the changelog, not the version number."]]
 
  [:p "We ask too much of our software version numbers, and we should expect more
@@ -63,11 +63,12 @@
   ", some of which we've already mentioned. Second, Chlog proposes a set of
  specifications for such a changelog. Third, Chlog offers an experimental
  implementation that maintains an "
-  [:code ".edn"]
-  " changelog specification, validates it, and generates easily-readable "
+  [:em "extensible data notation ("]
+  [:a {:href "https://github.com/edn-format/edn"} [:code "edn"]]
+  ") changelog specification, validates it, and generates easily-readable "
   [:span.small-caps "html"]
   " and markdown webpages based upon the changelog data."]
- 
+
  [:p "The resulting changelog looks like "
   [:a {:href "https://github.com/blosavio/chlog/blob/main/changelog.md"}
    "this"] "."]]

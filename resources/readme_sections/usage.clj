@@ -12,7 +12,7 @@
  [:h3 "Changelog information is Clojure data"]
 
  [:p "Changelog information is built by concatenating hashmaps contained in "
-  [:code ".edn"]
+  [:code "edn"]
   " files located in the "
   [:a {:href "#entries"} "changelog entries directory"]
   ", one file per version. Every "
@@ -28,7 +28,7 @@
   [:a {:href "https://github.com/blosavio/speculoos"} "Speculoos"]
   " style specification."]
 
- [:p "Briefly, the version parts are:"]
+ [:p "Briefly, the hashmap values:"]
 
  [:ul
   [:li [:strong "version"] " is an integer."]
@@ -41,7 +41,9 @@
     " Metosin description"]
    "."]
   [:li [:strong "breaking?"]
-   " is a boolean or nil (only valid for the initial release)."]
+   " is a boolean or "
+   [:code "nil"]
+   " (only valid for the initial release)."]
   [:li [:strong "urgency"] " is one of "
    [:code ":low"]
    ", "
@@ -66,12 +68,12 @@
   " key. A "
   [:em "change"]
   " hashmap looks like this."]
- 
+
  [:pre [:code "{:description ___\n :reference {:source ___\n             :url ___}\n :change-type ___\n :breaking? ___\n :altered-functions []\n :date {:year ___\n        :month ___\n        :day ___ }\n :responsible {:name ___\n               :email ___ }}"]]
 
- [:p "Besides a sequence of "
+ [:p "Besides the sequence of "
   [:code ":altered-functions"]
-  ", a change may contain sequences of "
+  " seen above, a change hashmap may also contain sequences of "
   [:code ":added-functions"]
   ", "
   [:code ":deprecated-functions"]
@@ -87,25 +89,41 @@
 
  [:ul
   [:li [:strong "date"] " analogous to the date of a version."]
-  [:li [:strong "reference"] " a map of source string, optional url string, optional ticket string/uuid."]
+  [:li [:strong "reference"] " (optional) a nested map of source string (e.g.,
+ a GitHub Issue, JIRA ticket, etc.), and url string."]
   [:li [:strong "breaking?"] " a boolean."]
-  [:li [:strong "altered-functions"] " a vector of symbols that were altered in this change."]
-  [:li [:strong "responsible"] " a hashmap of a name string and an email string."]
-  [:li [:strong "change-type"] " a keyword from an " [:a {:href "https://github.com/blosavio/chlog/blob/2304b2e780c23d7094872b0c58bf6a94277c77d2/src/chlog/changelog_specifications.clj#L43"} "enumerated list"] "."]
-  [:li [:strong "description"] " a a free-form string."]]
+  [:li [:strong "altered-functions"] " a nested vector of symbols that were
+ altered in this change."]
+  [:li [:strong "responsible"] " a nested hashmap of a name string and an email
+ string."]
+  [:li [:strong "change-type"] " a keyword from this "
+   [:a {:href "https://github.com/blosavio/chlog/blob/2304b2e780c23d7094872b0c58bf6a94277c77d2/src/chlog/changelog_specifications.clj#L43"}
+    "enumerated list"] "."]
+  [:li [:strong "description"] " a free-form string."]]
 
- [:p "The changelog data may be manipulated and queried with any suitable Clojure function, such as " [:code "get-in"] ", " [:code "assoc-in"] ", " [:code "update-in"] ", etc. Chlog includes specifications for changelog data and utilities for performing those validations, but any validation facility, such as " [:code "clojure.spec.alpha"] ", may be used."]
+ [:p "The changelog data may be manipulated and queried with any suitable
+ Clojure function, such as "
+  [:code "get-in"]
+  ", "
+  [:code "assoc-in"]
+  ", "
+  [:code "update-in"]
+  ", etc. The Chlog library includes specifications for changelog data and
+ utilities for performing those validations, but any Clojure validation
+ facility, such as "
+  [:code "clojure.spec.alpha"]
+  ", may be used once suitable specification are written."]
 
  [:p "Note: Chlog consults "
   [:em "every "]
-  " file in the changelog entries directory that begins with "
+  " file in the changelog entries directory whose filename begins with "
   [:code "changelog_v"]
   " and ends with "
   [:code ".edn"]
   ". Between those required bookends, files may be named according to whatever
- may be convienient, e.g., integers padded with zeros for human-readable sorting
+ may be convenient, e.g., integers padded with zeros for human-readable sorting
  in the local filesystem or desktop environment."]
- 
+
  [:h3 "Creating an " [:em "options"] " file"]
 
  [:p "The "
@@ -123,11 +141,11 @@
   [:li [:p [:code ":project-name-formatted"]
         " Project name (string) to display on changelog html/markdown
  documents."]]
-  
+
   [:li [:p [:code ":copyright-holder"]
         " Name displayed in the copyright statement in the footer of the
  changelog."]]
-  
+
   [:li
    [:p [:code ":UUID"]
     " Version 4 "
@@ -148,7 +166,7 @@
   [:li#entries
    [:p [:code ":changelog-entries-directory"]
     " Alternative directory to find changelog "
-    [:code ".edn"]
+    [:code "edn"]
     " files. Include trailing '/'. Defaults to "
     [:code "resources/changelog_entries/"] "."]]
 
@@ -183,7 +201,7 @@
         " and markdown files. Defaults to "
         [:code "false"]
         "."]]]
- 
+
  [:h3 "Generating the changelog documents"]
 
  [:p "The Chlog library generates "
@@ -198,7 +216,7 @@
 
  [:p "…in our  "
   [:span.small-caps "repl"]
-  "-attached editor. Or, we run the "
+  "-attached editor. Or, we could run the "
   [:code "-main"]
   " function from command line something like this."]
 
@@ -221,7 +239,7 @@
   [:span.small-caps "html"]
   " document with a "
   [:code (raw "&lt;head&gt;")]
-  ", etc., that is viewable in any browser. We may want to copy over the "
+  ", etc., that is viewable in any browser as-is. Copy over the "
   [:a {:href "https://github.com/blosavio/chlog/blob/main/doc/project.css"}
    "css file"]
   " for some light styling."]]

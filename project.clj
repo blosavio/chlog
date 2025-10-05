@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/chlog "2-SNAPSHOT0"
+(defproject com.sagevisuals/chlog "2"
   :description "A Clojure library for maintaining an edn changelog."
   :url "https://github.com/blosavio/chlog"
   :license {:name "MIT License"

@@ -3,9 +3,9 @@
 
  [:h3 "A version number is just a number"]
 
- [:p "Versioning software with "
+ [:p "Tagging software with "
   [:code "major.minor.patch"]
-  " numbers attempt to convey the notion "
+  " numbers attempts to convey the notion "
   [:em "Yes, we can safely upgrade to such-and-such version"]
   ". But the granularity is poor. What if a dependency does have a breaking
  change, but the breaking change is in a portion of the dependency that we don't
@@ -14,43 +14,44 @@
 
  [:p "If a version number is merely a label without semantics, how would someone
  judge whether to switch from one version to another? A detailed, concise,
- regularly-formatted changelog conveys all the information necessary to make an
- informed decision about if there is any benefit to change versions, if changing
- version will require changes to the consuming side, and if so, what changes are
- necessary."]
+ regularly-formatted changelog could convey all the information necessary to
+ make an informed decision about if there is any benefit to changing versions,
+ if changing versions will require updates on the consuming side, and if so,
+ what updates are necessary."]
 
  [:p "A later version is not promised to be "
   [:em "better"]
   ", merely different. The changelog authors will provide dispassionate
  information about the changes, and the people using the software can decide
  whether it is worth switching."]
- 
+
  [:p "Chlog is an experiment to detangle version numbers from changelog
- information. A version number "
+ information. A version number "
   [:code "n"]
-  " makes no claim other than it was released some time later than version "
+  " makes no claim other than it was released some time later than version "
   [:code "n-1"]
   "."]
 
  [:h3 "A changelog is data"]
- 
+
  [:p "The changelog "
   [:code "edn"]
   " files are the canonical sources of information. All other representations ("
   [:span.small-caps "html"]
-  "/markdown, etc) are derived from that and are merely conveniences."]
- 
+  "/markdown, etc) are derived from that, and are merely conveniences."]
+
  [:p#info "A human- and machine-readable "
   [:code "edn"]
-  " file will accompany each version. The global changelog is a sequence
- constructed by concatenating those hashmaps from all previous releases, i.e.,
- the per-version "
+  " file will accompany each version. Each file contains a hashmap detailing
+ that version. The global changelog is a sequence constructed by concatenating
+ those hashmaps from all previous releases, i.e.,
+ the per-version hashmaps contained in "
   [:code "changelog-v" [:em "N"] ".edn"]
-  " files in a designated sub-directory."]
- 
+  " files located in a designated sub-directory."]
+
  [:h3 "A low threshold for breakage"]
 
- [:p "The Chlog experiment focuses on the changelog being the sole source of
+ [:p "The Chlog experiment advocates the changelog being the sole source of
  information on what will happen when switching versions. For that to succeed,
  the entries must accurately communicate whether a change is breaking. Not every
  change can be objectively categorized as either breaking or non-breaking (more
@@ -58,9 +59,9 @@
  changes are claimed as breaking, the concept loses its meaning and purpose. But
  if a supposedly safe change ends up breaking for someone else, trust is lost."]
 
- [:p "Within a changelog, seeing "
+ [:p "A changelog that declares "
   [:code ":breaking? false"]
-  " declares that switching to that version will work as it worked before with
+  " stipulates that switching to that version will work as it worked before with
  zero other changes (including changes in dependencies). Otherwise, the change
  is a "
   [:a {:href "#breaking"} [:em "breaking change"]]
@@ -100,7 +101,7 @@
  in a function's defaults will in all cases be a non-breaking change. Or, a
  change in the documentation might be so severe that it's elevated to a breaking
  change."]
- 
+
  [:p "One important kind of change that sorta defies categorization is
  bug-fixes. According to the notion that a non-breaking change must be a perfect
  drop-in replacement, a bug fix would classify as a breaking change. Tentative
