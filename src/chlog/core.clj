@@ -80,8 +80,9 @@
         breaking-changes (grouped-changes true)
         non-breaking-changes (concat (grouped-changes false)
                                      (grouped-changes nil))
-        issue-reference #(if (:reference %) [:a {:href (:url (:reference %))} (:source (:reference %))] nil)
-        issue-reference-seperator #(if (:reference %) ": " nil)]
+        issue-reference #(when (:reference %)
+                           [:a {:href (:url (:reference %))} (:source (:reference %))])
+        issue-reference-seperator #(when (:reference %) ": ")]
     [:div
      [:h4 "Breaking changes"]
      (into [:ul] (map (fn [v] [:li [:div (issue-reference v) (issue-reference-seperator v) (str (:description v))]])) breaking-changes)

@@ -21,7 +21,7 @@
 
  [:pre [:code "{:version ___\n :date {:year ___\n        :month ___\n        :day ___ }\n :responsible {:name ___\n               :email ___ }\n :project-status ___\n :breaking? ___\n :urgency ___\n :comment ___\n :changes [...]}"]]
 
- [:p "This map (and all the following) is formally and canonically "
+ [:p "This hashmap (and all the following) is formally and canonically "
   [:a {:href "https://github.com/blosavio/chlog/blob/main/src/chlog/changelog_specifications.clj"}
    "specified"]
   " with a "
@@ -32,9 +32,13 @@
 
  [:ul
   [:li [:strong "version"] " is an integer."]
-  [:li [:strong "date"] " is a map of integer year, string month, and integer
- day"]
-  [:li [:strong "responsible"] " is a map of a name string and an email string."]
+  [:li#date [:strong "date"] " is a nested hashmap of integer year, string
+ month, and integer day."]
+  [:li [:strong "responsible"] " is a nested hashmap of a "
+   [:code ":name"]
+   " string and an "
+   [:code ":email"]
+   " string. "]
   [:li [:strong "project-status"] " is one of enumerated keywords borrowed from
  the "
    [:a {:href "https://github.com/metosin/open-source/blob/main/project-status.md"}
@@ -43,7 +47,7 @@
   [:li [:strong "breaking?"]
    " is a boolean or "
    [:code "nil"]
-   " (only valid for the initial release)."]
+   " (the later is only valid for the initial release)."]
   [:li [:strong "urgency"] " is one of "
    [:code ":low"]
    ", "
@@ -53,9 +57,9 @@
    "."]
   [:li [:strong "comment"] " is a free-form string."]
   [:li [:strong "changes"]
-   " is a vector of "
+   " is a nested vector of "
    [:em "change"]
-   " maps (discussed soon)."]]
+   " hashmaps (discussed soon)."]]
 
  [:p "A "
   [:a {:href "#changelog"} "changelog"]
@@ -88,14 +92,25 @@
  [:p "The parts of a change hashmap are:"]
 
  [:ul
-  [:li [:strong "date"] " analogous to the date of a version."]
-  [:li [:strong "reference"] " (optional) a nested map of source string (e.g.,
- a GitHub Issue, JIRA ticket, etc.), and url string."]
+  [:li [:strong "date"] " analogous to the "
+   [:a {:href "#date"} "date"]
+   " of a version."]
+  [:li [:strong "reference"] " (optional) a nested hashmap of "
+   [:code ":source"]
+   " string (e.g., a GitHub Issue, JIRA ticket, etc.), and "
+   [:code ":url"]
+   " string (creates a "
+   [:a {:href "https://github.com/blosavio/chlog/blob/main/resources/test_changelog/test_outputs/test_changelog.md#----------non-breaking-changes---------1"}
+    "line-leading hyperlink"]
+   ")."]
   [:li [:strong "breaking?"] " a boolean."]
   [:li [:strong "altered-functions"] " a nested vector of symbols that were
  altered in this change."]
-  [:li [:strong "responsible"] " a nested hashmap of a name string and an email
- string."]
+  [:li [:strong "responsible"] " a nested hashmap of a "
+   [:code ":name"]
+   " string and an "
+   [:code ":email"]
+   " string."]
   [:li [:strong "change-type"] " a keyword from this "
    [:a {:href "https://github.com/blosavio/chlog/blob/2304b2e780c23d7094872b0c58bf6a94277c77d2/src/chlog/changelog_specifications.clj#L43"}
     "enumerated list"] "."]
@@ -132,7 +147,7 @@
   [:a {:href "https://github.com/edn-format/edn"} "edn"]
   " file ("
   [:a {:href "https://github.com/blosavio/chlog/blob/main/resources/chlog_options.edn"} "example"]
-  ") that contains a map which supplies required information for generating a
+  ") that contains a hashmap which supplies required information for generating a
  changelog. It also declares preferences for other optional settings."]
 
  [:p "Required keys:"]

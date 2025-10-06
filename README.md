@@ -278,7 +278,7 @@
 &nbsp;:comment ___
 &nbsp;:changes [...]}</code></pre>
       <p>
-        This map (and all the following) is formally and canonically <a href=
+        This hashmap (and all the following) is formally and canonically <a href=
         "https://github.com/blosavio/chlog/blob/main/src/chlog/changelog_specifications.clj">specified</a> with a <a href=
         "https://github.com/blosavio/speculoos">Speculoos</a> style specification.
       </p>
@@ -289,18 +289,18 @@
         <li>
           <strong>version</strong> is an integer.
         </li>
-        <li>
-          <strong>date</strong> is a map of integer year, string month, and integer &nbsp;day
+        <li id="date">
+          <strong>date</strong> is a nested hashmap of integer year, string &nbsp;month, and integer day.
         </li>
         <li>
-          <strong>responsible</strong> is a map of a name string and an email string.
+          <strong>responsible</strong> is a nested hashmap of a <code>:name</code> string and an <code>:email</code> string.
         </li>
         <li>
           <strong>project-status</strong> is one of enumerated keywords borrowed from &nbsp;the <a href=
           "https://github.com/metosin/open-source/blob/main/project-status.md">Metosin description</a>.
         </li>
         <li>
-          <strong>breaking?</strong> is a boolean or <code>nil</code> (only valid for the initial release).
+          <strong>breaking?</strong> is a boolean or <code>nil</code> (the later is only valid for the initial release).
         </li>
         <li>
           <strong>urgency</strong> is one of <code>:low</code>, <code>:medium</code>, or <code>:high</code>.
@@ -309,7 +309,7 @@
           <strong>comment</strong> is a free-form string.
         </li>
         <li>
-          <strong>changes</strong> is a vector of <em>change</em> maps (discussed soon).
+          <strong>changes</strong> is a nested vector of <em>change</em> hashmaps (discussed soon).
         </li>
       </ul>
       <p>
@@ -336,10 +336,13 @@
       </p>
       <ul>
         <li>
-          <strong>date</strong> analogous to the date of a version.
+          <strong>date</strong> analogous to the <a href="#date">date</a> of a version.
         </li>
         <li>
-          <strong>reference</strong> (optional) a nested map of source string (e.g., &nbsp;a GitHub Issue, JIRA ticket, etc.), and url string.
+          <strong>reference</strong> (optional) a nested hashmap of <code>:source</code> string (e.g., a GitHub Issue, JIRA ticket, etc.), and
+          <code>:url</code> string (creates a <a href=
+          "https://github.com/blosavio/chlog/blob/main/resources/test_changelog/test_outputs/test_changelog.md#----------non-breaking-changes---------1">line-leading
+          hyperlink</a>).
         </li>
         <li>
           <strong>breaking?</strong> a boolean.
@@ -348,7 +351,7 @@
           <strong>altered-functions</strong> a nested vector of symbols that were &nbsp;altered in this change.
         </li>
         <li>
-          <strong>responsible</strong> a nested hashmap of a name string and an email &nbsp;string.
+          <strong>responsible</strong> a nested hashmap of a <code>:name</code> string and an <code>:email</code> string.
         </li>
         <li>
           <strong>change-type</strong> a keyword from this <a href=
@@ -373,7 +376,7 @@
       </h3>
       <p>
         The <em>options</em> file is an <a href="https://github.com/edn-format/edn">edn</a> file (<a href=
-        "https://github.com/blosavio/chlog/blob/main/resources/chlog_options.edn">example</a>) that contains a map which supplies required information for
+        "https://github.com/blosavio/chlog/blob/main/resources/chlog_options.edn">example</a>) that contains a hashmap which supplies required information for
         generating a &nbsp;changelog. It also declares preferences for other optional settings.
       </p>
       <p>
@@ -637,7 +640,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 05.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 06.<span id="uuid"><br>
       e0d63371-4eb7-4431-a5f1-1cf0f5c46a72</span>
     </p>
   </body>
