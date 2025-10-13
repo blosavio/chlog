@@ -1,0 +1,20 @@
+{:date {:year 2025
+        :month "October"
+        :day 13}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 4
+ :comment "Adjusting ReadMoi dependency version."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? true
+ :changes
+ [{:description "Chlog v3 required a ReadMoi snapshot. This version, v4,
+ requires the release version."
+   :date {:year 2025
+          :month "October"
+          :day 13}
+   :change-type :dependency-version
+   :breaking? true}]}
+

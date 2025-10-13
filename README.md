@@ -41,11 +41,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/chlog &quot;3&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/chlog &quot;4&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;3&quot;}</code></pre>
+      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;4&quot;}</code></pre>
       <h3>
         Require
       </h3>
@@ -458,7 +458,8 @@
         root directory where GitHub can find and display the changelog. We don&apos;t need a dedicated markdown converter to view this file; copy it to a
         <a href="https://gist.github.com/">GitHub gist</a> and it&apos;ll display similarly to when we view it on GitHub. The second file, by default written
         to the <code>resources/</code> directory, is a proper <span class="small-caps">html</span> document with a <code>&lt;head&gt;</code>, etc., that is
-        viewable in any browser as-is. Copy over the <a href="https://github.com/blosavio/chlog/blob/main/doc/project.css">css file</a> for some light styling.
+        viewable in any browser as-is. Copy over the <a href="https://github.com/blosavio/chlog/blob/main/doc/project.css">css file</a> for some lightweight
+        styling.
       </p>
     </section>
     <section id="possibilities">

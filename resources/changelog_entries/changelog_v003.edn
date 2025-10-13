@@ -10,7 +10,7 @@
  :urgency :medium
  :breaking? true
  :changes
- [{:description "Version 5 Readmoi, a dependency, introduces a `-main` function
+ [{:description "Version 5 ReadMoi, a dependency, introduces a `-main` function
  which conflicts with Chlog. This version implements an exclude pattern that
  fixes the problem described by the warning."
    :date {:year 2025

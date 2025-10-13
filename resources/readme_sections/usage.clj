@@ -257,5 +257,5 @@
   ", etc., that is viewable in any browser as-is. Copy over the "
   [:a {:href "https://github.com/blosavio/chlog/blob/main/doc/project.css"}
    "css file"]
-  " for some light styling."]]
+  " for some lightweight styling."]]
 

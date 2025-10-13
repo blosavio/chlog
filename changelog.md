@@ -4,6 +4,37 @@
       Chlog library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
+      <h3 id="v4">
+        version 4
+      </h3>
+      <p>
+        2025 October 13<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Adjusting ReadMoi dependency version.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> yes
+      </p>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Chlog v3 required a ReadMoi snapshot. This version, v4, requires the release version.
+            </div>
+          </li>
+        </ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul></ul>
+      </div>
+      <hr>
+    </section>
+    <section>
       <h3 id="v3">
         version 3
       </h3>
@@ -23,7 +54,7 @@
         <ul>
           <li>
             <div>
-              Version 5 Readmoi, a dependency, introduces a `-main` function which conflicts with Chlog. This version implements an exclude pattern that fixes
+              Version 5 ReadMoi, a dependency, introduces a `-main` function which conflicts with Chlog. This version implements an exclude pattern that fixes
               the problem described by the warning.
             </div>
           </li>
