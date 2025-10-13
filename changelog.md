@@ -4,6 +4,44 @@
       Chlog library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
+      <h3 id="v3">
+        version 3
+      </h3>
+      <p>
+        2025 October 13<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Made compatible with latest version of a dependency.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> yes
+      </p>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Version 5 Readmoi, a dependency, introduces a `-main` function which conflicts with Chlog. This version implements an exclude pattern that fixes
+              the problem described by the warning.
+            </div>
+          </li>
+          <li>
+            <div>
+              Fixed two improper dependency levels. Promoted ReadMoi to a full dependency because it is required by `core` ns. Demoted Speculoos because it is
+              merely a dev-time requirement.
+            </div>
+          </li>
+        </ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul></ul>
+      </div>
+      <hr>
+    </section>
+    <section>
       <h3 id="v2">
         version 2
       </h3>
@@ -114,7 +152,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 06.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 13.<span id="uuid"><br>
       d571f801-3b49-4fd9-a5f3-620e034d0a8d</span>
     </p>
   </body>

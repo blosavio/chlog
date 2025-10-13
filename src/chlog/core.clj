@@ -20,7 +20,7 @@
    [hiccup.element :as element]
    [hiccup.form :as form]
    [hiccup.util :as util]
-   [readmoi.core :refer :all]))
+   [readmoi.core :refer :all :exclude [-main]]))
 
 
 (defn renamed-fns

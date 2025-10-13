@@ -1,0 +1,30 @@
+{:date {:year 2025
+        :month "October"
+        :day 13}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 3
+ :comment "Made compatible with latest version of a dependency."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? true
+ :changes
+ [{:description "Version 5 Readmoi, a dependency, introduces a `-main` function
+ which conflicts with Chlog. This version implements an exclude pattern that
+ fixes the problem described by the warning."
+   :date {:year 2025
+          :month "October"
+          :day 13}
+   :change-type :dependency-version
+   :breaking? true}
+
+  {:description "Fixed two improper dependency levels. Promoted ReadMoi to a
+ full dependency because it is required by `core` ns. Demoted Speculoos because
+ it is merely a dev-time requirement."
+   :date {:year 2025
+          :month "October"
+          :day 13}
+   :change-type :dependency-version
+   :breaking? true}]}
+

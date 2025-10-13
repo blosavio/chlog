@@ -21,6 +21,8 @@
  :project-description "A Clojure library for maintaining an edn changelog"
  :project-name-formatted "Chlog"
 
+ :preferred-project-metadata :lein
+
  :readme-UUID #uuid "e0d63371-4eb7-4431-a5f1-1cf0f5c46a72"
 
  :readme-html-directory "doc/"
@@ -35,3 +37,4 @@
  :wrap-at 80
 
  :tidy-html? true}
+
