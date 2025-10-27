@@ -1,0 +1,19 @@
+{:date {:year 2025
+        :month "October"
+        :day 27}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 5
+ :comment "Adjusting ReadMoi dependency version."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? true
+ :changes
+ [{:description "Sync to ReadMoi release version 6."
+   :date {:year 2025
+          :month "October"
+          :day 27}
+   :change-type :dependency-version
+   :breaking? true}]}
+

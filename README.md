@@ -41,11 +41,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/chlog &quot;4&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/chlog &quot;5&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;4&quot;}</code></pre>
+      <pre><code>com.sagevisuals/chlog {:mvn/version &quot;5&quot;}</code></pre>
       <h3>
         Require
       </h3>
@@ -641,7 +641,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 27.<span id="uuid"><br>
       e0d63371-4eb7-4431-a5f1-1cf0f5c46a72</span>
     </p>
   </body>

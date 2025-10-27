@@ -4,6 +4,37 @@
       Chlog library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
+      <h3 id="v5">
+        version 5
+      </h3>
+      <p>
+        2025 October 27<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Adjusting ReadMoi dependency version.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> yes
+      </p>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Sync to ReadMoi release version 6.
+            </div>
+          </li>
+        </ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul></ul>
+      </div>
+      <hr>
+    </section>
+    <section>
       <h3 id="v4">
         version 4
       </h3>
@@ -183,7 +214,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 27.<span id="uuid"><br>
       d571f801-3b49-4fd9-a5f3-620e034d0a8d</span>
     </p>
   </body>
