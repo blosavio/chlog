@@ -3,7 +3,7 @@
  
  [:p [:a {:href "https://github.com/blosavio/speculoos/blob/main/changelog.md"} "Changelog"] " for a specification library."]
 
- [:p [:a {:href "https://github.com/blosavio/fn-in/blob/master/changelog.md"} "Changelog"] " for a collection manipulation library."]
+ [:p [:a {:href "https://github.com/blosavio/fn-in/blob/main/changelog.md"} "Changelog"] " for a collection manipulation library."]
 
  [:p [:a {:href "https://github.com/blosavio/readmoi/blob/main/changelog.md"} "Changelog"] " for a ReadMe generator library."]
 

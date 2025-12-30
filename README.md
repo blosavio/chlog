@@ -558,7 +558,7 @@
         <a href="https://github.com/blosavio/speculoos/blob/main/changelog.md">Changelog</a> for a specification library.
       </p>
       <p>
-        <a href="https://github.com/blosavio/fn-in/blob/master/changelog.md">Changelog</a> for a collection manipulation library.
+        <a href="https://github.com/blosavio/fn-in/blob/main/changelog.md">Changelog</a> for a collection manipulation library.
       </p>
       <p>
         <a href="https://github.com/blosavio/readmoi/blob/main/changelog.md">Changelog</a> for a ReadMe generator library.
@@ -641,7 +641,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 27.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 December 30.<span id="uuid"><br>
       e0d63371-4eb7-4431-a5f1-1cf0f5c46a72</span>
     </p>
   </body>
